@@ -1,0 +1,659 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%This is the LaTeX ARTICLE template for RSC journals
+%Copyright The Royal Society of Chemistry 2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[twoside,twocolumn,9pt]{article}
+\usepackage{extsizes}
+\usepackage[super,sort&compress,comma]{natbib} 
+\usepackage[version=3]{mhchem}
+\usepackage[left=1.5cm, right=1.5cm, top=1.785cm, bottom=2.0cm]{geometry}
+\usepackage{balance}
+\usepackage{mathptmx}
+\usepackage{sectsty}
+\usepackage{graphicx} 
+\usepackage{lastpage}
+\usepackage[format=plain,justification=justified,singlelinecheck=false,font={stretch=1.125,small,sf},labelfont=bf,labelsep=space]{caption}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{fnpos}
+\usepackage[english]{babel}
+\addto{\captionsenglish}{%
+  \renewcommand{\refname}{Notes and references}
+}
+\usepackage{array}
+\usepackage{droidsans}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage[compact]{titlesec}
+\usepackage{hyperref}
+%%% new packages below:
+\usepackage{tabularx}
+\usepackage{booktabs}
+\setlength{\tabcolsep}{3pt}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\usepackage{stfloats}
+\usepackage{placeins}
+\usepackage{cuted}
+\usepackage{afterpage}
+\usepackage{makecell}
+\usepackage{siunitx}
+\setcounter{dbltopnumber}{2}
+\renewcommand{\dbltopfraction}{0.9}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\usepackage{multirow}
+
+
+% \usepackage{epstopdf}
+
+\definecolor{cream}{RGB}{222,217,201}
+
+\begin{document}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+\fancypagestyle{plain}{
+%%%HEADER%%%
+\renewcommand{\headrulewidth}{0pt}
+}
+%%%END OF HEADER%%%
+
+%%%PAGE SETUP - Please do not change any commands within this section%%%
+\makeFNbottom
+\makeatletter
+\renewcommand\LARGE{\@setfontsize\LARGE{15pt}{17}}
+\renewcommand\Large{\@setfontsize\Large{12pt}{14}}
+\renewcommand\large{\@setfontsize\large{10pt}{12}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{7pt}{10}}
+\makeatother
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand\footnoterule{\vspace*{1pt}% 
+\color{cream}\hrule width 3.5in height 0.4pt \color{black}\vspace*{5pt}} 
+\setcounter{secnumdepth}{5}
+
+\makeatletter 
+\renewcommand\@biblabel[1]{#1}            
+\renewcommand\@makefntext[1]% 
+{\noindent\makebox[0pt][r]{\@thefnmark\,}#1}
+\makeatother 
+\renewcommand{\figurename}{\small{Fig.}~}
+\sectionfont{\sffamily\Large}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\bf}
+\setstretch{1.125} %In particular, please do not alter this line.
+\setlength{\skip\footins}{0.8cm}
+\setlength{\footnotesep}{0.25cm}
+\setlength{\jot}{10pt}
+\titlespacing*{\section}{0pt}{4pt}{4pt}
+\titlespacing*{\subsection}{0pt}{15pt}{1pt}
+%%%END OF PAGE SETUP%%%
+
+%%%FOOTER%%%
+\fancyfoot{}
+\fancyfoot[LO,RE]{\vspace{-7.1pt}\includegraphics[height=9pt]{head_foot/LF}}
+\fancyfoot[CO]{\vspace{-7.1pt}\hspace{13.2cm}\includegraphics{head_foot/RF}}
+\fancyfoot[CE]{\vspace{-7.2pt}\hspace{-14.2cm}\includegraphics{head_foot/RF}}
+\fancyfoot[RO]{\footnotesize{\sffamily{1--\pageref{LastPage} ~\textbar  \hspace{2pt}\thepage}}}
+\fancyfoot[LE]{\footnotesize{\sffamily{\thepage~\textbar\hspace{3.45cm} 1--\pageref{LastPage}}}}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\arrayrulewidth}{1pt}
+\setlength{\columnsep}{6.5mm}
+\setlength\bibsep{1pt}
+%%%END OF FOOTER%%%
+
+%%%FIGURE SETUP - please do not change any commands within this section%%%
+\makeatletter 
+\newlength{\figrulesep} 
+\setlength{\figrulesep}{0.5\textfloatsep} 
+
+\newcommand{\topfigrule}{\vspace*{-1pt}% 
+\noindent{\color{cream}\rule[-\figrulesep]{\columnwidth}{1.5pt}} }
+
+\newcommand{\botfigrule}{\vspace*{-2pt}% 
+\noindent{\color{cream}\rule[\figrulesep]{\columnwidth}{1.5pt}} }
+
+\newcommand{\dblfigrule}{\vspace*{-1pt}% 
+\noindent{\color{cream}\rule[-\figrulesep]{\textwidth}{1.5pt}} }
+
+\makeatother
+%%%END OF FIGURE SETUP%%%
+
+%%%TITLE, AUTHORS AND ABSTRACT%%%
+\twocolumn[
+  \begin{@twocolumnfalse}
+{\includegraphics[height=30pt]{head_foot/journal_name}\hfill\raisebox{0pt}[0pt][0pt]{\includegraphics[height=55pt]{head_foot/RSC_LOGO_CMYK}}\\[1ex]
+\includegraphics[width=18.5cm]{head_foot/header_bar}}\par
+\vspace{1em}
+\sffamily
+\begin{tabular}{m{4.5cm} p{13.5cm} }
+
+\includegraphics{head_foot/DOI} & \noindent\LARGE{\textbf{ChEmbed: Enhancing Chemical Literature Search Through Domain-Specific Text Embeddings}}\\
+% \noindent\LARGE{\textbf{ChEmbed: A Domain-Adapted Text Embedding Model for Enhanced Retrieval in Chemistry}}\\
+% \noindent\LARGE{\textbf{Domain-Adapted Embedding Models for Chemical Literature Retrieval}} \\
+\vspace{0.3cm} & \vspace{0.3cm} \\
+
+% $^{\ast}$
+ & \noindent\large{Ali Shiraee Kasmaee,\textit{$^{ab\ddag}$} Mohammad Khodadad,\textit{$^{ab\ddag}$} Mahdi Astaraki,\textit{$^{ab}$} Mohammad Arshi Saloot,\textit{$^{b}$} Nicholas Sherck,\textit{$^{c}$} Hamidreza Mahyar\textit{$^{a}$} and Soheila
+Samiee\textit{$^{b}$}} \\
+
+\includegraphics{head_foot/dates} & \noindent\normalsize{Retrieval-Augmented Generation (RAG) systems in chemistry heavily depend on accurate and relevant retrieval of chemical literature. However, general-purpose text embedding models frequently fail to adequately represent complex chemical terminologies, resulting in suboptimal retrieval quality. Specialized embedding models tailored to chemical literature retrieval have not yet been developed, leaving a substantial performance gap. To address this challenge, we introduce \textbf{ChEmbed}, the first purpose-built family of domain-adapted text embedding models engineered for chemical literature retrieval.These models are fine-tuned via contrastive learning on a dataset comprising chemistry-specific text from the PubChem, Semantic Scholar, and ChemRxiv corpora. To create effective training data, we employ large language models to synthetically generate queries, resulting in approximately 1.7 million high-quality query-passage pairs. Additionally, we augment the tokenizer by adding 900 chemically specialized tokens to previously unused slots, which significantly reduces the fragmentation of chemical entities, such as IUPAC names.
+ChEmbed also maintains a 8192-token context length, enabling the efficient retrieval of longer passages compared to many other open-source embedding models, which often have a context length of 512 or 2048 tokens.
+Evaluated on our newly introduced \textbf{ChemRxiv Retrieval} benchmark, ChEmbed outperforms state-of-the-art general embedding models, raising nDCG@10 from 0.82 to 0.91 (+9 pp). ChEmbed represents a practical, lightweight, and reproducible embedding solution that effectively improves retrieval for chemical literature search.}\\
+\end{tabular}
+
+ \end{@twocolumnfalse} \vspace{0.6cm}
+
+  ]
+%%%END OF TITLE, AUTHORS AND ABSTRACT%%%
+
+%%%FONT SETUP - please do not change any commands within this section
+\renewcommand*\rmdefault{bch}\normalfont\upshape
+\rmfamily
+\section*{}
+\vspace{-1cm}
+
+
+%%%FOOTNOTES%%%
+
+\footnotetext{\textit{$^{a}$~Department of Computational Science \& Engineering, McMaster University, Canada}}
+\footnotetext{\textit{$^{b}$~BASF Canada Inc., Canada}}
+\footnotetext{\textit{$^{c}$~BASF Corporation, USA}}
+
+%Please use \dag to cite the ESI in the main text of the article.
+%If you article does not have ESI please remove the the \dag symbol from the title and the footnotetext below.
+
+% \footnotetext{\dag~Supplementary Information available: [details of any supplementary information available should be included here]. See DOI: 00.0000/00000000.}
+
+\footnotetext{\ddag~These authors contributed equally to this work}
+
+
+%%%END OF FOOTNOTES%%%
+
+%%%MAIN TEXT%%%%
+\section{Introduction}
+Retrieval-Augmented Generation (RAG) enables large language models to leverage external sources at inference time, significantly enhancing factual accuracy when the task domain diverges from the model’s pre-training data. Chemistry epitomizes such divergence: highly specialized nomenclature, formulas, and reaction contexts rarely appear in general-purpose corpora, causing standard LLMs to hallucinate or misinterpret key concepts \cite{peng2021domain,acharya2024exploring,gu2021domain,zhang2024chemllm}. Because the quality of a RAG system is bound by the strength of its retriever, robust domain-specific text embeddings are indispensable \cite{nussbaum2024nomic}.
+
+Despite rapid advances in universal embedding encoders, a persistent performance gap remains in chemistry. Existing scientific models still struggle with fine-grained chemical terminology, and two structural issues throttle progress: (i) \textbf{data scarcity}, since contrastive learning requires curated query-passage pairs that are costly to obtain in specialized fields (recent work explores synthetic generation as a solution \cite{adler2024nemotron,bonifacio2022inpars,jeronymo2023inpars}); and (ii) \textbf{benchmark mismatch}, as most public retrieval benchmarks rely on encyclopedic summaries that fail to capture the nuances of primary chemical literature \cite{pmlr-v262-shiraee-kasmaee24a}. Furthermore, generic sub-word tokenizers fragment chemical names and molecular descriptors, degrading semantic coherence before encoding even begins. Prior work in financial text processing shows that domain-adapted tokenizers can outperform generic subword tokenizers for representing specialized terminology and improving downstream performance \cite{bommarito2025kl3m}. Motivated by these findings, we apply a lightweight tokenizer augmentation strategy tailored to chemical nomenclature.
+% \textcolor{green}{We address these challenges with  \textbf{ChEmbed}, a chemistry-specialized embedding model fine-tuned on 1.7M synthetic query–passage pairs from chemical literature, paired with a lightweight tokenizer augmentation that preserves key chemical terms. Thus, we introduce ChemRxiv Retrieval, a literature-derived benchmark designed to evaluate chemistry-focused retrieval beyond encyclopedic QA corpora.}
+We address these challenges with \textbf{ChEmbed}, the first chemistry-specialized embedding model fine-tuned on 1.7 million synthetic query-passage pairs drawn from chemical articles and sources, and paired with a domain-adapted tokenizer that preserves key domain tokens. ChEmbed is evaluated using a new retrieval benchmark built from chemistry articles. Our study makes four contributions:
+\begin{enumerate}
+\item \textbf{Synthetic data for domain adaptation:} We built a pipeline for large-scale synthetic query-passage generation with LLMs for Chemical Retrieval, and demonstrate that it provides effective training data for this task. %We demonstrate that large-scale synthetic query-passage generation with LLMs provides effective training data for chemical retrieval. 
+\item \textbf{Domain-adaptive tokenizer augmentation:} A lightweight vocabulary-patching technique that injects chemistry terms into an existing WordPiece tokenizer without retraining the base tokenizer or model from scratch.
+\item \textbf{Literature-driven benchmark:} We release a retrieval task benchmark constructed from chemical literature rather than encyclopedic text.
+\item \textbf{ChEmbed model:} Our publicly available encoder achieves a 9 \% absolute gain in nDCG@10 over its general-purpose baseline on the chemistry-specific benchmark.
+\end{enumerate}
+Together, these advances narrow the domain gap for retrieval-augmented generation in chemistry, paving the way for more reliable AI systems that can accelerate chemical research and discovery.
+
+\section{Related Work}
+\paragraph*{Text Embedding Models and Domain Adaptation}
+Text embedding models transform texts into fixed-length vectors capturing semantic meaning, enabling effective retrieval in tasks such as retrieval-augmented generation (RAG) \cite{wang2024multilingual}. Initially, embedding methods like Sentence-BERT (SBERT) used siamese or triplet networks to produce sentence embeddings \cite{reimers2019sentence}. Later, simpler contrastive learning approaches, notably SimCSE \cite{gao2021simcse}, demonstrated excellent results using minimal labels. Recent embedding models like E5 \cite{wang2022text}, Alibaba’s GTE \cite{li2023towards}, the BGE series \cite{chen2024bge}, and Qwen3 Embedding \cite{qwen3embedding} leverage large-scale pretraining and contrastive learning to create robust universal embeddings. Qwen3 Embedding notably explores decoder-only architectures, in contrast to the encoder-based approaches that have been dominant among earlier models. Notably, newer architectures such as ModernBERT \cite{warner2025smarter} and Nomic \cite{nussbaum2024nomic} have established long-context processing (8192+ tokens) as a standard, rendering the 512-token limits of earlier models insufficient for full-text scientific retrieval. Despite these advances, general embedding models often underperform in specialized domains. Researchers have responded by adapting language models specifically to the chemical domain. Some models, such as MatSciBERT \cite{gupta2022matscibert} and ChemicalBERT \cite{recobo_chemical_bert_uncased}, extend the pre-training of general-purpose encoders like BERT on chemical corpora. Other methods represent chemical structures directly, using SMILES strings \cite{wang2019smiles,zheng2024bert} or molecular graphs \cite{rong2020self,liu2021pre}. However, recent evaluations on chemical RAG systems \cite{amiri2025chunk} indicate that these older domain-specific models are frequently outperformed by modern generalist retrievers. This inversion suggests that domain pre-training alone is insufficient without the massive contrastive instruction tuning employed by generalist models. Consequently, a clear gap remains: no text embedding model specialized for retrieval in the chemical sciences has yet been developed or evaluated.
+
+\paragraph*{Synthetic Data Generation}
+A recent advancement in training language and retrieval models is the use of synthetic data generated by large language models (LLMs). At scale, synthetic datasets are becoming essential; for instance, NVIDIA's Nemotron relies on synthetic data generated by a 340B-parameter LLM for up to 98\% of its instruction-tuning tasks across diverse fields \cite{adler2024nemotron}. In information retrieval specifically, methods like InPars \cite{jeronymo2023inpars, bonifacio2022inpars} and Promptagator \cite{dai2022promptagator} prompt LLMs with just a few example queries to generate large amounts of synthetic queries aligned with existing passages. This methodology aligns with emerging trends in semantic supervision, such as SemCSE \cite{brinner2025semcse}, which demonstrate that synthetic LLM-generated signals often yield better retrieval alignment than traditional citation-based graphs. These generated query-passage pairs enable practical training of retrieval models, significantly alleviating data scarcity. This synthetic data approach has also been successfully applied to train text-embedding models, such as \textbf{\texttt{E5-Mistral-7B-instruct}}, which demonstrated that a general-purpose model could be trained almost exclusively on synthetic query-passage pairs \cite{wang2023improving}. Likewise, specialized embedding models, such as \textbf{MedEmbed}, fine-tuned specifically for medical and clinical use cases, have effectively utilized synthetic LLM-generated data \cite{balachandran2024medembed}.
+
+\paragraph*{Chemistry NLP Benchmarks} To evaluate text embeddings comprehensively, researchers typically rely on standard benchmarks such as BEIR and MTEB. BEIR (Benchmarking IR) is a widely-used suite containing 18 diverse retrieval datasets for zero-shot evaluation across various tasks, including question-answering and fact-checking \cite{thakur2021beir}. The Massive Text Embedding Benchmark (MTEB) further expands coverage, now including more than 100 tasks spanning over 1000 languages \cite{mteb_website} across various embedding applications like retrieval, classification, and clustering \cite{muennighoff2022mteb}. While these benchmarks are valuable for evaluating general-purpose models, they primarily feature general-domain tasks, with limited coverage of specialized scientific domains. To address this gap, domain-specific evaluation suites have been introduced. For instance, ChemTEB \cite{pmlr-v262-shiraee-kasmaee24a} provides a dedicated evaluation benchmark tailored for chemical sciences. ChemTEB encompasses 34 diverse chemical NLP tasks, including chemical text classification, clustering, text-SMILES mining, and retrieval. Although ChemTEB effectively evaluates general embedding models in chemistry contexts, it currently lacks retrieval tasks focused specifically on literature search, as its existing retrieval tasks primarily draw from encyclopedic sources.
+
+\paragraph*{Tokenizer Adaptation in Domain-Specific NLP} Various WordPiece-based \cite{wu2016google} strategies have been proposed to adapt BERT tokenizers for specialized domains. \textbf{SciBERT} \cite{beltagy2019scibert} exemplifies a complete retraining approach: it replaces BERT’s entire vocabulary with a new WordPiece vocabulary derived from scientific corpora and then pre-trains a domain-specific model from scratch. While effective, this yields a high computational cost. Alternative approaches seek to bypass tokenizer modification entirely; for instance, recent multi-modal adapters like ChemLML \cite{chemlml} and MoRA \cite{yin2025mora} use lightweight "linkers" to bridge text and molecular modalities. While efficient for generation, these adapter-based methods add inference complexity and do not fundamentally resolve the segmentation of chemical entities in the base encoder. Alternative approaches seek to bypass tokenizer modification entirely; for instance, recent multi-modal adapters like ChemLML \cite{deng2025chemical} and MoRA \cite{yin2025mora} use lightweight "linkers" to bridge text and molecular modalities. While efficient for generation, these adapter-based methods add inference complexity and do not fundamentally resolve the segmentation of chemical entities in the base encoder. In contrast, more lightweight methods inject or append domain terms into an existing model’s tokenizer without altering its architecture. For example, \textbf{CancerBERT} \cite{zhou2022cancerbert} repurposes BERT’s reserved \texttt{[UNUSED]} token slots to incorporate cancer-specific words, then continues pre-training on in-domain text, thus introducing new terminology without expanding the model size. Similarly, \textbf{AVocaDo} \cite{hong2021avocado} adapts BERT’s tokenizer by adding a small set of high-utility domain tokens to the original WordPiece vocabulary (identified from downstream data) and treating these new tokens’ embeddings as additional parameters learned during fine-tuning. Another approach, \textbf{exBERT} \cite{tai2020exbert}, extends the base tokenizer via an auxiliary embedding module: new domain-specific tokens receive their embedding vectors in a separate “extension” vocabulary, and the model learns to combine the original and extension embeddings through a trainable weighted sum, all while keeping the original BERT weights fixed. This method effectively integrates new vocabulary without modifying the core model, albeit with added implementation complexity. Overall, these approaches illustrate a spectrum of trade-offs between complete re-training for a custom vocabulary and more practical vocabulary augmentation techniques for domain adaptation.
+
+\section{Dataset Construction}
+Practical training of bi-encoder-based text embedding models typically relies on structured data in the form of (query, passage) pairs or triplets (query, positive passage, negatives), particularly when employing contrastive learning objectives \cite{li2023towards,xiao2024c,wang2022text,nussbaum2024nomic}. However, such structured datasets are often not readily available in specialized domains, such as chemistry. To enable the training of a chemistry-adapted embedding model, we begin by collecting paragraphs from chemistry-related scientific literature. Once these domain-specific passages are gathered, we use a Large Language Model (LLM), carefully prompted, to generate relevant queries corresponding to each paragraph. This process enables us to construct the paired data necessary for practical contrastive training in the chemistry domain. The datasets built and used in this study are summarized in Table~\ref{tab:chemistry-datasets}.
+
+\begin{table*}[t]
+% \small
+\caption{Summary of chemistry domain datasets used for training and evaluation}
+\label{tab:chemistry-datasets}
+\centering
+% \begin{tabularx}{\linewidth}{c l l c c c}
+\begin{tabular}{c l l c c c}
+\toprule
+Idx & Dataset              & Description                                                     & \# Samples & Usage & LLM used for query synthesis \\
+\midrule
+1   & PubChem compounds    & Title, IUPAC, SMILES, synonyms & 2,087,164 & Tokenizer & N/A \\
+2   & PubChem descriptions &  Compound descriptions    &   393,321  & Training & \texttt{gpt-4o-mini} \\
+3   & S2ORC chemistry      & Filtered chemistry paragraphs  & 1,187,726  & Training & \texttt{gpt-4.1-nano} \\
+4   & ChemRxiv paragraphs       & Extracted ChemRxiv paragraphs (CC-BY)               &   139,057 & Training & \texttt{o3-mini} \\
+5   & ChemRxiv paragraphs        & Extracted ChemRxiv paragraphs (CC-BY-NC) &    69,457  & Evaluation & \texttt{Claude Sonnet 3.7} \\
+6   & ChemRxiv metadata    & Title and abstract ChemRxiv preprints           &    30,378 & Training & N/A \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\subsection{Data Sources and Preprocessing}
+We used the following sources to gather chemistry-related paragraphs:
+\begin{enumerate}
+\item \textbf{PubChem} is a comprehensive database of chemical entities that contains information on over 100 million unique compounds, including names, SMILES, IUPAC names, synonyms, molecular formulas, and descriptions; it offers programmatic access (PUG-View) \cite{kim2019pubchem} through which we collected data, many of which lacked descriptions, resulting in around 393 thousand usable descriptions after preprocessing.
+\item \textbf{S2ORC} is an extensive collection of over 81 million academic papers, 8.1 million of which include structured full text \cite{lo2019s2orc, peS2o}. This dataset spans multiple disciplines and provides rich metadata, citation information, and full-text annotations. We specifically used the portion of the corpus licensed under the public domain and Creative Commons BY, comprising 6.2 million papers. From this subset, we extracted approximately 118,000 documents tagged with the chemistry subject, split them into individual paragraphs, and, after filtering out conclusion sections, table/figure captions, and short or uninformative segments, retained around 1.18 million high-quality paragraphs.
+\item \textbf{ChemRxiv} is a free, open-access preprint server for chemistry and related fields, offering early distribution of research findings. It provides a public API, which we utilized to extract metadata and PDFs for approximately 30 thousand chemistry manuscripts. We processed these documents using GROBID \cite{GROBID}, a tool for extracting structured information from scientific publications, and segmented the texts into individual paragraphs. To ensure data quality, following a methodology similar to that used in the S2ORC dataset \cite{lo2019s2orc, peS2o}, we filtered out paragraphs with an average unigram log probability less than -20 or containing fewer than 50 words. This preprocessing resulted in a corpus of approximately 209 thousand high-quality paragraphs.
+\end{enumerate}
+\subsection{Synthetic Query Generation via LLMs}
+To create high-quality paired data for contrastive training, we leveraged Large Language Models (LLMs) to generate synthetic queries directly from chemistry paragraphs. Our goal was to closely replicate realistic information retrieval scenarios, such as a user typing a specific, chemistry-focused query into a search system to retrieve a relevant passage that answers the question. To achieve this, we carefully designed an LLM prompt instructing the model to produce exactly one clear, meaningful chemistry question that the given paragraph can answer. The prompt explicitly disallowed superficial or yes/no questions, as well as references to the text itself (e.g., "according to this paragraph"). We used a suite of LLMs from the OpenAI platform (\texttt{o3-mini}, \texttt{gpt-4.1-nano}, and \texttt{gpt-4o-mini}) chosen to balance scale, cost, and data complexity during synthetic query generation. For constructing the evaluation retrieval dataset, we used a separate model, \texttt{Claude Sonnet 3.7 Thinking}, applied to held-out ChemRxiv paragraphs not seen during training.
+
+After applying this procedure, our dataset consisted only of the query-passage pairs that strictly met our generation criteria. The LLMs refused to generate queries for approximately 29 thousand paragraphs, effectively filtering them out during the process. Upon manual inspection of a sample of these refused cases, we confirmed that the LLM consistently excluded paragraphs that were irrelevant, too brief, or lacked meaningful scientific content, such as funding acknowledgments, overly general conclusions, or short and information-poor text segments. %For a detailed description of our prompt design, precise generation criteria, and additional details, we refer readers to the Supplementary Material Section~\ref{supp:qgen}.
+
+\begin{figure*}[!t]
+        \centering
+        \includegraphics[width=\linewidth]{figures/pipeline3.pdf}
+        \caption{Overview of the ChEmbed pipeline. Chemistry-related paragraphs are extracted from multiple sources and paired with synthetic queries generated by prompting large language models (LLMs). A held-out subset of ~69,000 paragraphs is reserved for evaluation, with distinct LLMs used for generating training and evaluation queries. In parallel, a ChemVocab tokenizer is trained from more than two million IUPAC names, and 900 unique tokens are injected into the \texttt{bert-base-uncased} unused tokens. The base encoder (nomic-embed-text-v1) is then fine-tuned on the generated query-passage pairs to produce the final ChEmbed family of models.}
+        \label{fig:pipeline}
+\end{figure*}
+
+\section{Model Architecture and Domain Adaptation}
+A core challenge in building domain-specialized embedding models is choosing a base architecture that is both performant and open for further adaptation. For this work, we selected the nomic embedding family \cite{nussbaum2024nomic}, which represents one of the best and most lightweight open-source text embedding models available, supporting long context up to 8192 tokens. Unlike many proprietary or partially open alternatives, the nomic models provide full access to intermediate weights and pretraining data, enabling reproducibility and deeper scientific analysis. Architecturally, nomic builds on a BERT but introduces key architectural improvements, including rotary positional embeddings, FlashAttention for efficient long-context processing, and SwiGLU activations \cite{shazeer2020glu}, that collectively improve both accuracy and scalability. Notably, it is the best-performing open-source embedding model on the domain-specific chemical benchmark \cite{pmlr-v262-shiraee-kasmaee24a}, and its training on large general corpora already gives it a broad knowledge of chemical language. For these reasons, nomic models serve as an ideal starting point for domain adaptation in chemistry.
+
+\subsection{Domain Adaptation Strategies}
+To adapt the nomic base model for chemistry retrieval, we explored several fine-tuning strategies with both supervised and unsupervised objectives. Two key variants were considered, both originally trained by the nomic team: \texttt{nomic-embed-text-v1-unsupervised}, initially trained on 235 million unsupervised pairs and a max learning rate of \num{2e-4}, and \texttt{nomic-embed-text-v1}, which was further fine-tuned on 1.6 million hard-negative mined supervised triplets with a lower learning rate of \num{2e-5}.
+
+For model training, we considered two data formats: (1) direct use of query-passage pairs, and (2) constructing triplets (query, document, negatives). Both variants optimize the same contrastive InfoNCE objective \cite{oord2018representation}:
+\[
+\mathcal{L}
+= -\frac{1}{N}\sum_{i=1}^{N}
+\log
+\frac{e^{\,s(q_i,d_i^+)/\tau\,}}
+{\,e^{\,s(q_i,d_i^+)/\tau\,}
+  +\displaystyle\sum_{d^-\in\mathcal{N}(q_i)}e^{\,s(q_i,d^-)/\tau\,}
+}\!
+\]
+where \(s(q,d)\) is the cosine similarity scaled by temperature \(\tau\), \(d_i^+\) is the true positive document for query \(q_i\), and \(\mathcal{N}(q_i)\) denotes the set of negatives for \(q_i\). In the “pairs” configuration, \(\mathcal{N}(q_i)\) contains all other passages in the batch (in-batch negatives), while in the “triplets” configuration, it contains exactly the \(H\) pre-mined negatives we attach to each query. Following the nomic setup, we used 7 negatives per query, as increasing beyond this showed little additional improvement. We experimented with three approaches (7 hard, 7 random, and 3 hard + 4 random negatives). Our experiments showed that fine-tuning with pure in-batch negatives outperformed the triplet-style objective on our synthetic chemistry data, likely because our “hard” negatives were model-generated rather than human-labeled. Most hyperparameters were kept the same as those reported for nomic, with changes including a linear warmup over 5\% of the total steps, and training with a maximum context length of 2048 tokens (enabling the model to process extended sequences of up to 8192 tokens during inference by dynamically scaling the positional embeddings \cite{emozilla2023ntk,peng2023yarn}). Models were trained on 4×NVIDIA A100 40GB GPUs using GradCache \cite{gao2021scaling} and mixed precision \cite{micikevicius2017mixed}, which enabled the use of a large total batch size of \textbf{$16,384$} for more effective contrastive learning.
+
+\subsection{Tokenizer Adaptation}
+A persistent limitation in adapting language models to chemistry is the suboptimal tokenization of complex nomenclature (e.g., IUPAC names, SMILES). Like many other open-source text embedding models built on BERT \cite{devlin2019bert}, the first generation of nomic embedding models utilizes the standard \textbf{\texttt{bert-base-uncased}} tokenizer, which has a vocabulary size of 30,522. Notably, this tokenizer includes exactly 994 [UNUSED] tokens, reserved placeholders not assigned to any word or subword in the original vocabulary.  When extending a model's tokenizer with fewer than 994 new tokens, a minimal intervention strategy is possible: simply repurpose the unused slots to encode new, domain-specific terms. This "plug-and-play" approach preserves the original tokenizer’s structure and compatibility while directly enhancing its ability to represent specialized chemical language. To construct a chemistry-adapted tokenizer, we trained a WordPiece tokenizer \cite{wu2016google} on \textbf{$2,083,502$} unique IUPAC names from PubChem compounds. Tokens already present in \texttt{bert-base-uncased} were removed, and the top 900 tokens from the remaining chemistry-specific vocabulary were injected into the \textbf{\texttt{[UNUSED]}} slots to create our adapted tokenizer \textbf{ChemVocab}. Table~\ref{tab:chemvocab-examples} provides a qualitative comparison between \textbf{ChemVocab} and the standard \texttt{bert-base-uncased} tokenizer, demonstrating how our domain-specific augmentation preserves the semantic integrity of chemical nomenclature by preventing excessive subword fragmentation. For these newly injected tokens, we initialized their embeddings by sampling from a normal distribution with a mean of 0 and a standard deviation of 0.2. This procedure enabled the model to encode rich chemical terminology with minimal architectural changes. A summary of the complete data and model pipeline is illustrated in Figure~\ref{fig:pipeline}.
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{Term} & \textbf{ChemVocab (ours)} & \textbf{\texttt{bert-base-uncased}} \\
+\midrule
+\texttt{chlorofluorocarbon}     & \texttt{chloro/fluoro/carbon}            & \texttt{ch/lor/of/lu/oro/carbon} \\
+\texttt{acetaminophen}          & \texttt{acet/amino/phen}                 & \texttt{ace/tam/ino/ph/en} \\
+\texttt{secbutylamine}          & \texttt{sec/butyl/amine}                  & \texttt{sec/bu/ty/lam/ine} \\
+\texttt{nitrophenylphosphate}   & \texttt{nitrophenyl/phosphate}           & \texttt{ni/tro/ph/en/yl/ph/os/phate} \\
+\bottomrule
+\end{tabular}
+\caption{Qualitative comparison of chemical nomenclature segmentation: Our augmented \textbf{ChemVocab} maintains semantic sub-units (e.g., functional groups) compared to the over-segmentation observed in the general-purpose \texttt{bert-base-uncased} tokenizer.}
+\label{tab:chemvocab-examples}
+\end{table*}
+
+\section{Experiments \& Results}
+\label{sec:exp-results}
+\paragraph*{Experimental setup} We fine-tune \texttt{nomic-embed-text-v1} for the chemical retrieval task. The fine-tuning is performed with and without adding new tokens to the tokenizer. For the optimized addition of new tokens, we tried three approaches, which are explained in more detail in Section~\ref {subsec:tokenizer}.
+
+Effectiveness is assessed through retrieval tasks using three benchmark suites: ChemRxiv Retrieval, MTEB (English v2), and ChemTEB. \textbf{ChemRxiv Retrieval} is our newly designed task, comprising a corpus of 69,457 chemical literature paragraphs from ChemRxiv with 5,000 synthetic queries generated using a different LLM (Anthropic's Claude 3.7 Sonnet) than used for training, thus mitigating potential generation bias. \textbf{MTEB (English v2)} \cite{muennighoff2022mteb} is a widely recognized retrieval benchmark featuring 41 English-language tasks across seven categories, including classification, clustering, and retrieval. However, it is a general domain benchmark and does not focus on chemistry use cases. Given that our model is English and the primary goal of this work is to adapt models for retrieval tasks in the chemical domain, we exclusively evaluate the model using its retrieval datasets. \textbf{ChemTEB} \cite{pmlr-v262-shiraee-kasmaee24a} is a chemistry-focused adaptation of MTEB containing two retrieval tasks mainly sourced from encyclopedic data, aiming to evaluate the generalizability of embedding models to chemical domains.
+
+\subsection{Domain-Specific Retrieval Performance}
+\begin{table}[!b]
+    \centering
+    \caption{Impact of different tokenizer-adaptation variants on ChemRxiv retrieval performance}
+    \label{tab:tok-ablation}
+    \begin{tabular}{lcc}
+    \toprule
+    \textbf{Variant} & $nDCG@10$ & $\Delta$ vs.\ baseline \\
+    \midrule
+    \texttt{nomic-embed-text-v1} (baseline)       & 0.821 & --      \\
+    \texttt{ChEmbed\textsubscript{vanilla}}                 &  0.902 & +8.1 \% \\
+    \texttt{ChEmbed\textsubscript{full}}                     & 0.895 & +7.4 \% \\
+    \texttt{ChEmbed\textsubscript{plug}}                     & 0.903 & +8.2 \% \\
+    \textbf{\texttt{ChEmbed\textsubscript{progressive}}}      & \textbf{0.911} & +9.0 \% \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table*}[!t]
+\centering \small
+\caption{Performance of embedding models on the \textbf{ChemRxiv Retrieval} task. “N/A” means the provider has not released parameter counts. Best scores per metric are shown in bold.}
+\label{tab:chemrxiv-results}
+\begin{tabular}{lccccc}
+\toprule
+Model Name & Emb. size & \#Params (M) & MAP@10 & MRR@10 & NDCG@10 \\
+\midrule
+    \multicolumn{6}{l}{\textbf{Open-Source Models}}\\
+    \texttt{chemical-bert-uncased} & 768 & 109.9 & 0.096 & 0.096 & 0.110 \\
+    \texttt{matscibert} & 768 & 109.9 & 0.117 & 0.117 & 0.137 \\
+    \texttt{nomic-bert-2048} & 768 & 136.7 & 0.019 & 0.019 & 0.025 \\
+    \texttt{ModernBERT-base} & 768 & 149.0 & 0.048 & 0.048 & 0.056 \\
+    \texttt{ModernBERT-large} & 1024 & 394.8 & 0.049 & 0.049 & 0.058 \\
+    \texttt{scibert\_scivocab\_uncased} & 768 & 109.9 & 0.101 & 0.101 & 0.119 \\
+    \texttt{bert-base-uncased} & 768 & 109.5 & 0.099 & 0.099 & 0.117 \\
+    \texttt{all-MiniLM-L12-v2} & 384 & 33.4 & 0.556 & 0.556 & 0.603 \\
+    \texttt{all-MiniLM-L6-v2} & 384 & 22.7 & 0.626 & 0.626 & 0.674 \\
+    \texttt{all-mpnet-base-v2} & 768 & 109.5 & 0.618 & 0.618 & 0.670 \\
+    \texttt{multi-qa-mpnet-base-dot-v1} & 768 & 109.5 & 0.697 & 0.697 & 0.741 \\
+    \texttt{e5-small} & 384 & 33.0 & 0.682 & 0.682 & 0.726 \\
+    \texttt{e5-base} & 768 & 109.0 & 0.728 & 0.728 & 0.770 \\
+    \texttt{e5-large} & 1024 & 335.0 & 0.765 & 0.765 & 0.806 \\
+    \texttt{e5-small-v2} & 384 & 33.0 & 0.715 & 0.715 & 0.756 \\
+    \texttt{e5-base-v2} & 768 & 109.0 & 0.717 & 0.718 & 0.761 \\
+    \texttt{e5-large-v2} & 1024 & 335.0 & 0.781 & 0.781 & 0.821 \\
+    \texttt{multilingual-e5-small} & 384 & 118.0 & 0.736 & 0.736 & 0.778 \\
+    \texttt{multilingual-e5-base} & 768 & 278.0 & 0.758 & 0.757 & 0.798 \\
+    \texttt{multilingual-e5-large} & 1024 & 560.0 & 0.753 & 0.753 & 0.794 \\
+    \texttt{gte-small} & 384 & 33.4 & 0.687 & 0.687 & 0.735 \\
+    \texttt{gte-base} & 768 & 109.5 & 0.700 & 0.700 & 0.748 \\
+    \texttt{gte-large} & 1024 & 335.1 & 0.722 & 0.722 & 0.768 \\
+    \texttt{gte-multilingual-base} & 1024 & 305.0 & 0.712 & 0.712 & 0.761 \\
+    \texttt{bge-small-en} & 384 & 33.4 & 0.589 & 0.589 & 0.638 \\
+    \texttt{bge-base-en} & 768 & 109.5 & 0.604 & 0.604 & 0.655 \\
+    \texttt{bge-large-en} & 1024 & 335.1 & 0.584 & 0.584 & 0.635 \\
+    \texttt{bge-small-en-v1.5} & 384 & 33.4 & 0.672 & 0.672 & 0.719 \\
+    \texttt{bge-base-en-v1.5} & 768 & 109.5 & 0.698 & 0.698 & 0.744 \\
+    \texttt{bge-large-en-v1.5} & 1024 & 335.1 & 0.717 & 0.717 & 0.763 \\
+    \texttt{bge-m3} & 4096 & 568.0 & 0.758 & 0.758 & 0.798 \\
+    \texttt{nomic-embed-text-v1-unsupervised} & 768 & 136.7 & 0.773 & 0.774 & 0.814 \\
+    \texttt{nomic-embed-text-v1} & 768 & 136.7 & 0.782 & 0.782 & 0.821 \\
+    \texttt{nomic-embed-text-v1.5} & 768 & 137.0 & 0.739 & 0.739 & 0.783 \\
+    \texttt{nomic-embed-text-v2-moe} & 768 & 475.3 & 0.781 & 0.781 & 0.820 \\
+    \texttt{modernbert-embed-base} & 768 & 149.0 & 0.772 & 0.772 & 0.813 \\
+    \texttt{stella\_en\_1.5B\_v5} & 8960 & 1540.0 & 0.760 & 0.760 & 0.802 \\
+    \texttt{jina-embeddings-v3} & 1024 & 572.0 & 0.715 & 0.715 & 0.760 \\
+    \texttt{Qwen3-Embedding-0.6B}$^{\dagger}$ & 1024 & 596.0 & 0.779 & 0.779 & 0.819 \\
+    \texttt{Qwen3-Embedding-4B}$^{\dagger}$ & 2560 & 4020.0 & 0.826 & 0.826 & 0.861 \\
+    \texttt{Qwen3-Embedding-8B}$^{\dagger}$ & 4096 & 7570.0 & 0.831 & 0.831 & 0.865 \\
+    \texttt{ChEmbed\textsubscript{vanilla}} & 768 & 136.7 & 0.878 & 0.878 & 0.902 \\
+    \texttt{ChEmbed\textsubscript{progressive}} & 768 & 136.7 & \textbf{0.889} & \textbf{0.889} & \textbf{0.911} \\
+    \midrule
+    \multicolumn{6}{l}{\textbf{Proprietary Models}}\\
+    \texttt{text-embedding-ada-002} & 1536 & N/A & 0.725 & 0.726 & 0.770 \\
+    \texttt{text-embedding-3-small} & 1536 & N/A & 0.721 & 0.721 & 0.767 \\
+    \texttt{text-embedding-3-large} & 3072 & N/A & 0.728 & 0.729 & 0.775 \\
+    \texttt{amazon-titan-embed-text-v1} & 1536 & N/A & 0.611 & 0.611 & 0.665 \\
+    \texttt{amazon-titan-embed-text-v2} & 1024 & N/A & 0.763 & 0.763 & 0.805 \\
+    \texttt{cohere-embed-english-v3} & 1024 & N/A & 0.737 & 0.737 & 0.781 \\
+    \texttt{cohere-embed-multilingual-v3} & 1024 & N/A & 0.747 & 0.747 & 0.789 \\
+    \bottomrule
+\multicolumn{6}{l}{\footnotesize $^{\dagger}$\,Loaded with 8-bit quantization to fit into GPU VRAM; no major performance drop observed.}\\
+\end{tabular}
+\end{table*}
+
+\paragraph*{Quantitative performance comparison}
+Table~\ref{tab:chemrxiv-results} presents the performance of different model variants evaluated on the ChemRxiv Retrieval benchmark. Our ChEmbed variants consistently outperform not only the initial \texttt{nomic-embed-text-v1} baseline, but also all other notable open-source and proprietary embedding models evaluated to date.
+Notably, the vanilla model \textbf{ChEmbed\textsubscript{vanilla}}, which uses the original BERT tokenizer, achieved an \textit{nDCG@10} of \textbf{0.902}, representing a +8.1 percentage point gain comparing with the \texttt{nomic-embed-text-v1} baseline (0.821). Our best-performing variant, which utilizes a progressive tokenizer adaptation schedule (\textbf{ChEmbed\textsubscript{progressive}}), achieves an \textit{nDCG@10} of \textbf{0.911}, representing a total improvement of +9.0 percentage points over the base model. All ChEmbed variants, including the smallest, also outperform the strongest alternative open-source model, \texttt{Qwen3-Embedding-8B}, which reaches only 0.865 \textit{nDCG@10} despite being over 55 times larger in parameter count.
+
+\begin{figure*}[!t]
+        \centering
+        \includegraphics[width=0.8\linewidth]{figures/ndcg.pdf}
+        \caption{Model efficiency on the ChemRxiv retrieval task. The x-axis represents retrieval speed, the y-axis shows ranking effectiveness measured by normalized Discounted Cumulative Gain ($nDCG@10$), and circle diameters are proportional to the number of model parameters.}
+        \label{fig:bubble}
+\end{figure*}
+    
+\paragraph*{Speed-performance trade-off analysis}
+Figure~\ref{fig:bubble} visualizes the efficiency-performance balance of various embedding models on the ChemRxiv retrieval. The models are plotted according to retrieval speed (samples per second) on the horizontal axis and \textit{nDCG@10} on the vertical axis. The marker size indicates the model's parameter count, while color reflects the maximum embedding dimension provided by the model. On an NVIDIA A10 24GB GPU, our ChEmbed variants process an average of 189 samples per second, whereas the strongest competing open-source models, \texttt{Qwen3-Embedding-4B} and \texttt{Qwen3-Embedding-8B}, process only 13 and 10 samples per second, respectively. Notably, both Qwen3 models are more than 30 and 55 times larger than ChEmbed, yet still fall short in retrieval accuracy, with their best variant (\texttt{Qwen3-Embedding-8B}) achieving only 0.865 \textit{nDCG@10} compared to ChEmbed's 0.911. This demonstrates that ChEmbed achieves state-of-the-art chemical literature retrieval performance while being significantly faster and more lightweight than its closest open-source alternatives.
+
+\subsection{Tokenizer adaptation analysis}
+\label{subsec:tokenizer}
+
+For the chemical retrieval task. The fine-tuning under four tokenizer configurations while keeping the rest of the training recipe unchanged: \\
+% \begin{enumerate}
+    % \item 
+     1.\textbf{ ChEmbed\textsubscript{vanilla}}: The vanilla variant with \texttt{bert-base-uncased} tokenizer and no vocabulary augmentation.  \\
+    % \item 
+     2.\textbf{ ChEmbed\textsubscript{full}}: ChemVocab tokenizer, \emph{all} embedding parameters are trainable.  \\
+    % \item 
+     3.\textbf{ ChEmbed\textsubscript{plug}}: ChemVocab tokenizer, but only the new token embeddings are updated while original BERT token embeddings stay frozen; the rest of the network is trainable. \\
+    % \item 
+    4.\textbf{  ChEmbed\textsubscript{progressive}}: progressive schedule, first train some epochs only the new token embeddings (all other weights frozen), then unfreeze and train the whole network for additional epochs.  
+% \end{enumerate}
+
+To assess the impact of tokenizer modifications on retrieval effectiveness, Table~\ref{tab:tok-ablation} highlights gains from each tokenizer variant compared to the baseline. The results clearly demonstrate that incremental vocabulary adaptations significantly enhance domain-specific retrieval capabilities. The progressive adaptation method, which initially trains only new token embeddings before a full network update, achieves the best overall performance, suggesting that structured incremental updates effectively leverage domain-specific vocabulary integration while maintaining general-domain robustness.
+
+
+\begin{table*}[!b]
+\centering \small
+\caption{Performance comparison across shared non‑retrieval task categories in MTEB and ChemTEB, covering open‑domain and chemistry‑specific data, respectively. Evaluation metrics are: accuracy for Classification, V‑measure for Clustering, and average precision (AP) for Pair Classification. Mean (Task) reports the average score across all individual tasks, while Mean (Task Type) first averages results within each task category and then computes the mean across the category‑level averages.
+}
+\label{tab:nonretrieval-wide}
+\setlength{\tabcolsep}{5pt}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l
+              ccc cc
+              ccc cc}
+\toprule
+& \multicolumn{5}{c}{\textbf{ChemTEB}} & \multicolumn{5}{c}{\textbf{MTEB}}\\
+\cmidrule(lr){2-6}\cmidrule(lr){7-11}
+Model
+& Cls & Clust & Pair & Mean (T) & Mean (T-type)
+& Cls & Clust & Pair & Mean (T) & Mean (T-type)\\
+\midrule
+nomic-embed-text-v1-unsupervised & 0.824 & 0.567 & \textbf{0.635} & 0.763 & \textbf{0.675}
+               & 0.754 & 0.444 & 0.836 & 0.637 & 0.678 \\
+nomic-embed-text-v1       & \textbf{0.83}7 & 0.570 & 0.594 & \textbf{0.764} & 0.667
+               & \textbf{0.774} & \textbf{0.466} & \textbf{0.853} & \textbf{0.657} & \textbf{0.698} \\
+\texttt{ChEmbed\textsubscript{vanilla}}& 0.795 & 0.526 & 0.594 & 0.731 & 0.638
+               & 0.766 & 0.427 & 0.843 & 0.635 & 0.678 \\
+\texttt{ChEmbed\textsubscript{full}}& 0.813 & 0.546 & 0.547 & 0.735 & 0.635
+               & 0.773 & 0.436 & 0.849 & 0.643 & 0.686 \\
+\texttt{ChEmbed\textsubscript{plug}}& 0.796 & \textbf{0.583} & 0.564 & 0.730 & 0.648
+               & 0.767 & 0.425 & 0.842 & 0.635 & 0.678 \\
+\texttt{ChEmbed\textsubscript{progressive}}   & 0.801 & 0.490 & 0.566 & 0.726 & 0.619
+               & 0.769 & 0.426 & 0.845 & 0.637 & 0.680 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}
+
+\subsection{Impact of Task and Domain Adaptation}
+The primary goal of this work is to improve chemical literature search by optimizing a text-embedding model. To this end, we fine‑tuned the model using retrieval-style query–passage pairs curated from chemical literature. While domain- or task-specific fine-tuning often enhances in-domain performance, it is also known to introduce trade-offs, potentially reducing effectiveness on out-of-domain tasks or more general benchmarks \citep{mosbach2023analyzing}.
+
+To systematically assess these trade-offs, we employed two publicly available evaluation suites: ChemTEB \cite{pmlr-v262-shiraee-kasmaee24a}, which focuses on chemistry-specific embedding tasks, and MTEB English v2 \citep{muennighoff2022mteb}, a general-purpose benchmark spanning a wide range of downstream tasks and domains. These benchmarks allow us to quantify the broader impact of fine-tuning beyond chemistry-focused retrieval.
+
+Overall, the results align with the expected behavior of domain-adapted models. The fine-tuned model exhibits substantial improvements in chemistry retrieval, reflecting the benefits of specialized supervision. However, this gain is accompanied by modest reductions in performance on other tasks—even within the chemical domain—and on several general-domain tasks included in MTEB. Table~\ref{tab:nonretrieval-wide} summarizes performance differences between the base model and its fine-tuned variants across non-retrieval tasks in both general and chemistry-specific settings.
+
+
+% \emph{ChemTEB} \cite{pmlr-v262-shiraee-kasmaee24a} and \emph{MTEB English v2} \citep{muennighoff2022mteb}, are two publicly available benchmarks designed to assess text embedding models across a broad range of tasks and general-purpose domains, respectively. In this study these benchmarks are employed to evaluate the impact of our fine-tuning on the model's performance in other tasks and domains. 
+% The findings indicate that, consistent with the expected trade-off, the adapted model achieved improved performance in chemistry retrieval at the cost of slightly lower performance on other tasks even within the chemistry domain. Table~\ref{tab:nonretrieval-wide} summarize the observed performance of the base model and the fine-tuned versions of it on other tasks both from general domain (MTEB), and Chemistry domain (ChemTEB) in most cases. 
+
+% Open-domain retrieval was also slightly affected by optimizing the tokenizer and model weights for chemistry. As shown in Table~\ref{tab:retrieval-wide}, the performance of our chemistry fine-tuned model is slightly worse than it original open source variant before fine-tuning. %-- \textcolor{red}{this is the most tricky table to be presented, specifically the row for ChemTEB, the reason is that ChemTEB retrieval is expected to be both on the same task and domain (we even originally designed ChemTEB for this purpose), and since it is an accepted work and already integrated in MTEB for the reviewers criticizing it by a new work may not be reasonable. If we want to increase the chance of acceptance we should either not reporting it here (only reporting MTEB Retrieval here) and expand this task of ChemTEB to integrate this better data as well; or fully criticize ChemTEB here as not really doing what it claimed for which may be fine for this paper, but not generally good for our own credit :)}).
+% Therefore, this trade-off should be carefully considered when applying the fine-tuned model in broader contexts.
+
+Open-domain retrieval performance also shows a slight decrease following tokenizer and weight adaptation for chemistry. As presented in Table~\ref{tab:retrieval-wide}, the fine-tuned model performs marginally worse than its original open-source counterpart on broad retrieval benchmarks. These observations underscore that the benefits of domain specialization come with measurable trade-offs, which should be carefully considered when applying our fine-tuned model outside chemistry-focused retrieval workflows.
+
+% \begin{table*}[!t]
+% \centering
+% \caption{Retrieval performance (nDCG@10↑) with dataset statistics.
+% Benchmarks are ordered from most specialized to most general. \textcolor{red}{Should get updated}}
+% \label{tab:retrieval-wide}
+% \setlength{\tabcolsep}{5pt}
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{l cc ccc | ccc}
+% \toprule
+%  & & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} &
+%    \multicolumn{3}{c}{\textbf{nDCG@10 ↑}} \\ 
+% \cmidrule(lr){4-6}\cmidrule(lr){6-9}
+% Dataset & Domain-Specific & Encyclopedic & \#Tasks & Avg Queries & Avg Corpus &
+%  \texttt{nomic-embed-text-v1} & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
+% \midrule
+% ChemRxiv Retrieval   & \cmark  & \xmark& 1  & 5000   & $69,457$   & 0.821 & 0.902 & \textbf{0.911} \\
+% \textcolor{blue}{ChemTEB Retrieval}    & \xmark\textcolor{red}{?}  & \cmark & 2  & 116   & $16,501$   & 0.763 & 0.706 & 0.718 \\
+% MTEB Retrieval       & \xmark & \cmark & 10 & 1482 & $109,645$  & 0.544 & 0.458 & 0.462 \\
+% \bottomrule
+% \end{tabular}}
+% \end{table*}
+
+\begin{table*}[!t]
+\centering
+\caption{Retrieval performance comparison across chemistry-specific and open‑domain tasks. Dataset descriptions and performance metrics for each model–dataset pair are provided.}
+\label{tab:retrieval-wide}
+\setlength{\tabcolsep}{5pt}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ll c ccc | ccc}
+\toprule
+ & & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} &
+   \multicolumn{3}{c}{\textbf{nDCG@10 ↑}} \\ 
+\cmidrule(lr){4-6}\cmidrule(lr){6-9}
+Task & Dataset & Domain-Specific & \#Tasks & Avg Queries & Avg Corpus &
+ \texttt{nomic-embed-text-v1} & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
+\midrule
+Chemistry Retrieval & ChemTEB 1.0   & \cmark  &  3  & 5116   & $85,958$   & ? & ? & \textbf{?} \\
+% \textcolor{blue}{ChemTEB Retrieval}    & \xmark\textcolor{red}{?}  & \cmark & 2  & 116   & $16,501$   & 0.763 & 0.706 & 0.718 \\
+Open-domain Retrieval & MTEB Retrieval       & \xmark &  10 & 1482 & $109,645$  & 0.544 & 0.458 & 0.462 \\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+% \subsection{Evaluation on General Benchmarks}
+% The main objective of this work is to improve chemical literature search by optimizing an embedding model. To that end, we fine-tuned the model on retrieval-style query–passage pairs from chemical literature, which made up approximately 99\% of the training data.
+% % Since the main objective of this work is enhancing the chemical literature search with optimized embedding model for this task, 
+% % the primary training objective for our embedding model involved fine-tuning on retrieval-style query-passage pairs, which comprised approximately 99\% of the training data. 
+% \textcolor{red}{what is the other 1\%?}
+% % Moreover, the corpus for fine-tuning specifically consists of specialized chemical literature. 
+% In general, fine-tuning a model on a specific domain or task improves performance within that context, but often at the expense of reduced performance on general domains or other tasks \citep{mosbach2023analyzing}. 
+% % However, publicly available evaluation benchmarks, namely \textbf{MTEB English v2} and \textbf{ChemTEB}, were originally designed to evaluate text embedding models across a broader range of tasks and general-purpose domains. Such general benchmarks may fail to accurately measure improvements in specialized retrieval capabilities, potentially leading to misleading conclusions about model performance. Consequently, it becomes essential to critically examine two key aspects of the mismatch between training and evaluation benchmarks: first, \textbf{task mismatch}, and second, \textbf{domain mismatch}.
+% Publicly available evaluation benchmarks, namely \textbf{MTEB English v2} and \textbf{ChemTEB}, were originally designed to evaluate text embedding models across a broader range of tasks and general-purpose domains. Supplementar material \ref{ssec:Task_and_domain_adaptation} evaluate the impact of this fine-tuning on the performance of the model in other tasks and general domains. The findings reflects that aligned with the expected trade-off the improved performance of the adapted model achieved at the cost of slightly lower performance in other tasks even in Chemistry domain (Supplementary Table~\ref{tab:}), and other domains even in retrieval task (Supplementary Table~\ref{tab:})
+
+% Therefore, it is important to consider this aspect in application of the fine-tuend model. 
+
+% \paragraph*{Task Adaptation} To explore the task mismatch, we evaluated model performance on non-retrieval tasks that are shared between ChemTEB and MTEB. Specifically, we considered Classification, Clustering, and Pair Classification, reporting both the overall task-average score (averaged across all individual tasks) and the category-average score (first averaging within each task category, then averaging across all categories). As expected, the general-purpose embedding model, \texttt{nomic-embed-text-v1}, consistently outperformed our retrieval-focused variants, achieving mean performance scores of 0.764 (ChemTEB) and 0.657 (MTEB) across all tasks. Within the ChEmbed family, only \texttt{ChEmbed\textsubscript{plug}} stands out, achieving the highest Clustering score on ChemTEB (0.583) among all models. In all other non-retrieval tasks, the baseline model or its unsupervised variant outperforms the ChEmbed variants. These findings highlight a critical trade-off: fine-tuning exclusively for retrieval inherently shifts the model's focus away from unrelated task categories. Therefore, evaluation should reflect the actual target use case rather than relying solely on broad assessments.
+
+% \begin{figure*}[!t]
+%     \centering
+%     \includegraphics[width=.48\linewidth]{figures/ndcg-epoch-chemrxiv.pdf}
+%     \includegraphics[width=.48\linewidth]{figures/ndcg-epoch-chemteb.pdf}
+%     % \caption{Performance of each epoch's weight on ChemRxiv retrieval evaluation set (left) and ChemTEB (right).}
+%     \caption{Divergent Training Dynamics: Retrieval performance (nDCG@10) across training epochs on the target ChemRxiv benchmark (left) versus the general ChemTEB benchmark (right). The opposing trends demonstrate that optimizing for specialized literature retrieval actively moves the model distribution away from the encyclopedic scope of ChemTEB.}
+%     \label{fig:training-curves}
+% \end{figure*}
+
+% \begin{table*}[!b]
+% \centering
+% \caption{Retrieval performance (nDCG@10↑) with dataset statistics.
+% Benchmarks are ordered from most specialized to most general.}
+% \label{tab:retrieval-wide}
+% \setlength{\tabcolsep}{5pt}
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{l cc ccc | ccc}
+% \toprule
+%  & & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} &
+%    \multicolumn{3}{c}{\textbf{nDCG@10 ↑}} \\ 
+% \cmidrule(lr){4-6}\cmidrule(lr){6-9}
+% Dataset & Domain-Specific & Encyclopedic & \#Tasks & Avg Queries & Avg Corpus &
+%  \texttt{nomic-embed-text-v1} & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
+% \midrule
+% ChemRxiv Retrieval   & \cmark  & \xmark& 1  & 5000   & $69,457$   & 0.821 & 0.902 & \textbf{0.911} \\
+% ChemTEB Retrieval    & \xmark  & \cmark & 2  & 116   & $16,501$   & 0.763 & 0.706 & 0.718 \\
+% MTEB Retrieval       & \xmark & \cmark & 10 & 1482 & $109,645$  & 0.544 & 0.458 & 0.462 \\
+% \bottomrule
+% \end{tabular}}
+% \end{table*}
+
+% % \paragraph*{Domain Adaptation} We further analyzed the domain mismatch by comparing model retrieval performance across ChemRxiv-Retrieval, ChemTEB-Retrieval, and MTEB-Retrieval. For a more accurate comparison, the retrieval dataset characteristics, including the average number of queries and average corpus size, were calculated for each benchmark. ChemRxiv Retrieval, a specialized chemistry benchmark closely aligned with our training domain, comprises 5000 queries and a corpus of 69,000 documents. In contrast, ChemTEB Retrieval, despite being chemically-themed, consists of tasks derived from encyclopedic corpora such as HotpotQA \cite{yang2018hotpotqa} and Natural Questions \cite{kwiatkowski2019natural}, specifically \textbf{ChemHotpotQARetrieval} (only 206 queries, searching within 10,069 documents) and ChemNQRetrieval (merely 27 queries, within 22,933 documents), averaging only 117 queries and a 16,501-document corpus per retrieval task. Similarly, MTEB Retrieval covers broader general-domain queries, averaging approximately 1482 queries and a corpus size of $109,645$ documents per task. These substantial differences in query and corpus scale underscore ChemTEB's limited representativeness as a benchmark for evaluating specialized chemical literature retrieval. This limitation is empirically reinforced by the checkpoint analysis shown in Figure~\ref{fig:training-curves}. In this figure, we assess the performance of \texttt{ChEmbed\textsubscript{vanilla}} model snapshots saved after each epoch of fine-tuning. As shown, performance on ChemRxiv Retrieval shows an overall upward trend across epochs, with several peaks and fluctuations, while performance on ChemTEB Retrieval steadily declines. This opposite trend highlights that ChemTEB’s retrieval queries and passages differ substantially in distribution from the specialized chemistry literature used for training, 
+% \paragraph*{Domain Adaptation} We further analyzed the domain mismatch by comparing model retrieval performance across ChemRxiv-Retrieval, ChemTEB-Retrieval, and MTEB-Retrieval. For a more accurate comparison, the retrieval dataset characteristics, including the average number of queries and average corpus size, were calculated for each benchmark. ChemRxiv Retrieval, a specialized chemistry benchmark closely aligned with our training domain, comprises 5000 queries and a corpus of 69,000 documents. In contrast, ChemTEB Retrieval, despite being chemically-themed, consists of tasks derived from encyclopedic corpora such as HotpotQA \cite{yang2018hotpotqa} and Natural Questions \cite{kwiatkowski2019natural}, specifically \textbf{ChemHotpotQARetrieval} (only 206 queries, searching within 10,069 documents) and ChemNQRetrieval (merely 27 queries, within 22,933 documents), averaging only 117 queries and a 16,501-document corpus per retrieval task. Similarly, MTEB Retrieval covers broader general-domain queries, averaging approximately 1482 queries and a corpus size of $109,645$ documents per task. These substantial differences in query and corpus scale underscore ChemTEB's limited representativeness as a benchmark for evaluating specialized chemical literature retrieval. This limitation is empirically reinforced by the checkpoint analysis shown in Figure~\ref{fig:training-curves}. In this figure, we assess the performance of \texttt{ChEmbed\textsubscript{vanilla}} model snapshots saved after each epoch of fine-tuning. As shown, performance on ChemRxiv Retrieval shows an overall upward trend across epochs, with several peaks and fluctuations, while performance on ChemTEB Retrieval steadily declines. This opposite trend highlights that ChemTEB’s retrieval queries and passages differ substantially in distribution from the specialized chemistry literature used for training, resulting in divergent performance trajectories. As the model specializes in chemical literature, it naturally misaligns with the general-domain distribution of ChemTEB.
+% \paragraph*{} Integrating both aspects discussed above, our analysis reveals apparent limitations of existing benchmarks for accurately assessing embedding models fine-tuned for retrieval tasks in specialized scientific domains. Non-retrieval results highlight the importance of closely matching the evaluation task with the training objective, as fine-tuning for retrieval inherently sacrifices performance gains on unrelated tasks. Likewise, retrieval results and training dynamics highlight the critical importance of ensuring domain alignment between training data and evaluation benchmarks. Given these observations, we argue that an effective and meaningful evaluation of chemistry retrieval embedding models must be explicitly aligned across two dimensions: the retrieval task itself and the specialized domain of literature. Such alignment motivates the introduction of a new retrieval benchmark.
+
+
+\section*{Conclusions}
+In this study, we introduce \textbf{ChEmbed}, a family of domain-adapted embedding models specifically designed for retrieving chemical literature. By using a progressive tokenizer augmentation strategy and training on large batches of synthetic query-passage pairs, \textbf{ChEmbed} significantly improved retrieval accuracy. Our model achieved a notable improvement of 9\% in nDCG\@10 on the ChemRxiv retrieval task compared to a general embedding model, surpassing larger proprietary models while maintaining efficiency, speed, and supporting long contexts of up to 8192 tokens. Our study revealed important insights into domain adaptation. Specifically, synthetic contrastive training effectively addresses the common issue of data scarcity in specialized fields, such as chemistry. Additionally, while our lightweight vocabulary augmentation strategy does not fully replace complete tokenizer retraining, it proved to be helpful in practice and offers a pragmatic, efficient alternative when full retraining is not feasible. We also demonstrated the importance of evaluating models on tasks closely matching their intended domain, as illustrated by the differences between ChemRxiv articles and generic benchmarks, such as ChemTEB and MTEB. Nevertheless, some limitations remain. Currently, our model focuses solely on English-language contexts and retrieval tasks, which might not directly generalize to other NLP tasks. Several promising directions can further improve our approach. Exploring multilingual capabilities and incorporating molecular structures directly into embeddings may enhance chemical understanding. Additionally, future efforts could consider building domain-specific embedding models from scratch when sufficient domain data is available, rather than starting from general text embeddings. Regarding tokenization, adopting selective token augmentation guided by domain expertise could overcome the current limitations associated with purely automated WordPiece token selection. Finally, while our methods specifically targeted chemistry, particularly tokenizer augmentation and synthetic query-based contrastive training, they can be broadly generalized to other scientific or technical domains. Beyond generalization, \textbf{ChEmbed} directly benefits chemical discovery workflows and literature search tasks by making retrieval more accurate, efficient, and practical for researchers.
+
+\section*{Author contributions}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Ali Shiraee Kasmaee:} Conceptualization, Data curation, Formal analysis, Investigation, Methodology, Software, Visualization, Writing – original draft, Writing – review \& editing.
+    \item \textbf{Mohammad Khodadad:} Conceptualization, Formal analysis, Methodology, Software, Writing – review \& editing.
+    \item \textbf{Mahdi Astaraki:} Conceptualization, Data curation, Formal analysis, Software, Validation, Visualization, Writing – original draft.
+    \item \textbf{Mohammad Arshi Saloot:} Conceptualization, Writing – review \& editing.
+    \item \textbf{Nicholas Sherck:} Conceptualization, Validation, Writing – review \& editing.
+    \item \textbf{Hamidreza Mahyar:} Conceptualization, Funding acquisition, Project administration, Resources, Supervision, Writing – review \& editing.
+    \item \textbf{Soheila Samiee:} Conceptualization, Methodology, Project administration, Resources, Supervision, Validation, Writing – original draft, Writing – review \& editing.
+\end{itemize}
+
+\section*{Conflicts of interest}
+BASF has submitted a patent application covering components of the methodology presented in this manuscript.
+
+\section*{Data availability}
+% The training and evaluation scripts are available at \href{https://github.com/HSILA/contrastors}{github.com/HSILA/contrastors}. The evaluation results and notebooks for generating manuscript tables and plots can be found at \href{https://github.com/HSILA/ChEmbed-Results}{github.com/HSILA/ChEmbed-Results}. The data gathering and synthetic query generation scripts are hosted at \href{https://github.com/HSILA/Chemistry-Data}{github.com/HSILA/Chemistry-Data}. The training datasets are available at \href{https://huggingface.co/collections/BASF-AI/chembed-training-data-6862b0a4f07a1c6892648d70}{Huggingface}. Any additional materials not publicly available due to licensing restrictions are available from the corresponding author on reasonable request.
+All resources required to reproduce the findings of this study are publicly available.
+\begin{itemize}
+    \item \textbf{Model Weights:} The fine-tuned model weights for all ChEmbed variants (supporting the "LLM fine-tuning" guidelines) are available on Hugging Face at \href{https://huggingface.co/collections/BASF-AI/chembed}{huggingface.co/collections/BASF-AI/chembed} under the Creative Commons Attribution–NonCommercial 4.0 (CC BY‑NC 4.0) license.
+    % \item \textbf{Training Data \& LLM Logs:} The complete training datasets, including the 1.7 million synthetic query-passage pairs generated via LLMs (serving as the inference input/output logs), are hosted at \href{https://huggingface.co/collections/BASF-AI/chembed-training-data-6862b0a4f07a1c6892648d70}{Hugging Face Collection: BASF-AI/chembed-training-data}  under the Creative Commons Attribution–NonCommercial 4.0 (CC BY‑NC 4.0) license. 
+    \item \textbf{Codebase:} Evaluation scripts and supporting utilities are hosted at \href{https://github.com/HSILA/ChEmbed/}{github.com/HSILA/ChEmbed}.%The training and evaluation scripts, including the specific fine-tuning recipes, are available at \href{https://github.com/HSILA/ChEmbed/}{github.com/HSILA/ChEmbed}.
+    \item \textbf{Data Extraction:} The data gathering pipeline and synthetic query generation scripts (including prompts) are hosted at \href{https://github.com/HSILA/Chemistry-Data}{github.com/HSILA/Chemistry-Data}.
+    \item \textbf{Evaluation Results:} The raw evaluation results and notebooks used to generate the manuscript tables and plots can be found at \href{https://github.com/HSILA/ChEmbed-Results}{github.com/HSILA/ChEmbed-Results}.
+\end{itemize}
+
+Permanent DOIs for the code and datasets (via Zenodo) will be made available upon acceptance of the manuscript. Any additional materials not publicly available due to licensing restrictions are available from the corresponding author on reasonable request.
+
+\section*{Acknowledgements}
+The author(s) gratefully acknowledge the financial support received for the research, authorship, and/or publication of this article, made possible by \textbf{MITACS} funding number IT32409. This project also benefited from the computational resources provided by the Narval clusters of the \textbf{Digital Research Alliance of Canada}. We extend our sincere appreciation to \textbf{Adam Wojciech Bartwiki} for his project management contributions and to \textbf{Tobias Roth} for his support with computational resources and technical assistance. The authors acknowledge the use of large language models (Claude 3.5 Sonnet, ChatGPT, Gemini) for assistance in linguistic refinement, conceptual discussion, and code refactoring during the preparation of this manuscript. All output was verified by the authors.
+
+%%%END OF MAIN TEXT%%%
+
+%The \balance command can be used to balance the columns on the final page if desired. It should be placed anywhere within the first column of the last page.
+
+\balance
+
+%If notes are included in your references you can change the title from 'References' to 'Notes and references' using the following command:
+%\renewcommand\refname{Notes and references}
+
+%%%REFERENCES%%%
+\bibliography{references}
+\bibliographystyle{rsc}
+% \newpage
+% \setcounter{figure}{0}
+% \setcounter{table}{0}
+% \appendix
+% \makeatletter
+% \renewcommand \thesection{S\@arabic\c@section}
+% \renewcommand\thetable{S\@arabic\c@table}
+% \renewcommand \thefigure{S\@arabic\c@figure}
+% \makeatother
+
+% \section*{Supplementary materials}
+% \label{sec:supplementary}
+
+% \subsection*{Evaluation on General Benchmarks}
+% The main objective of this work is to improve chemical literature search by optimizing an embedding model. To that end, we fine-tuned the model on retrieval-style query–passage pairs from chemical literature, which made up approximately 99\% of the training data.
+% % Since the main objective of this work is enhancing the chemical literature search with optimized embedding model for this task, 
+% % the primary training objective for our embedding model involved fine-tuning on retrieval-style query-passage pairs, which comprised approximately 99\% of the training data. 
+% \textcolor{red}{what is the other 1\%?}
+% % Moreover, the corpus for fine-tuning specifically consists of specialized chemical literature. 
+% In general, fine-tuning a model on a specific domain or task improves performance within that context, but often at the expense of reduced performance on general domains or other tasks \citep{mosbach2023analyzing}. 
+% % However, publicly available evaluation benchmarks, namely \textbf{MTEB English v2} and \textbf{ChemTEB}, were originally designed to evaluate text embedding models across a broader range of tasks and general-purpose domains. Such general benchmarks may fail to accurately measure improvements in specialized retrieval capabilities, potentially leading to misleading conclusions about model performance. Consequently, it becomes essential to critically examine two key aspects of the mismatch between training and evaluation benchmarks: first, \textbf{task mismatch}, and second, \textbf{domain mismatch}.
+% Publicly available evaluation benchmarks, namely \textbf{MTEB English v2} and \textbf{ChemTEB}, were originally designed to evaluate text embedding models across a broader range of tasks and general-purpose domains. 
+
+% \paragraph*{Task Adaptation} To explore the impact of task adaptation, we evaluated model performance on non-retrieval tasks that are shared between ChemTEB and MTEB. Specifically, we considered Classification, Clustering, and Pair Classification, reporting both the overall task-average score (averaged across all individual tasks) and the category-average score (first averaging within each task category, then averaging across all categories). As expected, the general-purpose embedding model, \texttt{nomic-embed-text-v1}, consistently outperformed our retrieval-focused variants, achieving mean performance scores of 0.764 (ChemTEB) and 0.657 (MTEB) across all tasks. Within the ChEmbed family, only \texttt{ChEmbed\textsubscript{plug}} stands out, achieving the highest Clustering score on ChemTEB (0.583) among all models. In all other non-retrieval tasks, the baseline model or its unsupervised variant outperforms the ChEmbed variants. These findings highlight a critical trade-off: fine-tuning exclusively for retrieval inherently shifts the model's focus away from unrelated task categories. Therefore, evaluation should reflect the actual target use case rather than relying solely on broad assessments.
+
+% \begin{figure*}[!t]
+%     \centering
+%     \includegraphics[width=.48\linewidth]{figures/ndcg-epoch-chemrxiv.pdf}
+%     \includegraphics[width=.48\linewidth]{figures/ndcg-epoch-chemteb.pdf}
+%     % \caption{Performance of each epoch's weight on ChemRxiv retrieval evaluation set (left) and ChemTEB (right).}
+%     \caption{Divergent Training Dynamics: Retrieval performance (nDCG@10) \textcolor{blue}{by checkpoint models saved} across training epochs \textcolor{red}{is left panel reflect performance on training epochs or set-a-side epochs for evaluation, that you reported the performance on here in the table 4? Which model is it? Vanilla version or token adapted?} on the target ChemRxiv benchmark (left) versus the general ChemTEB benchmark (right). The opposing trends demonstrate that optimizing for specialized literature retrieval actively moves the model distribution away from the encyclopedic scope of ChemTEB. \textcolor{red}{do you know which check point eventually selected as the target model? Is it the last one?}}
+%     \label{fig:training-curves}
+% \end{figure*}
+
+% \begin{table*}[!b]
+% \centering
+% \caption{Retrieval performance (nDCG@10↑) with dataset statistics.
+% Benchmarks are ordered from most specialized to most general.}
+% \label{tab:retrieval-wide}
+% \setlength{\tabcolsep}{5pt}
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{l cc ccc | ccc}
+% \toprule
+%  & & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} &
+%    \multicolumn{3}{c}{\textbf{nDCG@10 ↑}} \\ 
+% \cmidrule(lr){4-6}\cmidrule(lr){6-9}
+% Dataset & Domain-Specific & Encyclopedic & \#Tasks & Avg Queries & Avg Corpus &
+%  \texttt{nomic-embed-text-v1} & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\ 
+% \midrule
+% ChemRxiv Retrieval   & \cmark  & \xmark& 1  & 5000   & $69,457$   & 0.821 & 0.902 & \textbf{0.911} \\
+% ChemTEB Retrieval    & \xmark  & \cmark & 2  & 116   & $16,501$   & 0.763 & 0.706 & 0.718 \\
+% MTEB Retrieval       & \xmark & \cmark & 10 & 1482 & $109,645$  & 0.544 & 0.458 & 0.462 \\
+% \bottomrule
+% \end{tabular}}
+% \end{table*}
+
+% % \paragraph*{Domain Adaptation} We further analyzed the domain mismatch by comparing model retrieval performance across ChemRxiv-Retrieval, ChemTEB-Retrieval, and MTEB-Retrieval. For a more accurate comparison, the retrieval dataset characteristics, including the average number of queries and average corpus size, were calculated for each benchmark. ChemRxiv Retrieval, a specialized chemistry benchmark closely aligned with our training domain, comprises 5000 queries and a corpus of 69,000 documents. In contrast, ChemTEB Retrieval, despite being chemically-themed, consists of tasks derived from encyclopedic corpora such as HotpotQA \cite{yang2018hotpotqa} and Natural Questions \cite{kwiatkowski2019natural}, specifically \textbf{ChemHotpotQARetrieval} (only 206 queries, searching within 10,069 documents) and ChemNQRetrieval (merely 27 queries, within 22,933 documents), averaging only 117 queries and a 16,501-document corpus per retrieval task. Similarly, MTEB Retrieval covers broader general-domain queries, averaging approximately 1482 queries and a corpus size of $109,645$ documents per task. These substantial differences in query and corpus scale underscore ChemTEB's limited representativeness as a benchmark for evaluating specialized chemical literature retrieval. This limitation is empirically reinforced by the checkpoint analysis shown in Figure~\ref{fig:training-curves}. In this figure, we assess the performance of \texttt{ChEmbed\textsubscript{vanilla}} model snapshots saved after each epoch of fine-tuning. As shown, performance on ChemRxiv Retrieval shows an overall upward trend across epochs, with several peaks and fluctuations, while performance on ChemTEB Retrieval steadily declines. This opposite trend highlights that ChemTEB’s retrieval queries and passages differ substantially in distribution from the specialized chemistry literature used for training, 
+% \paragraph*{Domain Adaptation} We further analyzed the impact of domain adaptation comparing model retrieval performance across ChemRxiv-Retrieval, ChemTEB-Retrieval, and MTEB-Retrieval. For a more accurate comparison, the retrieval dataset characteristics, including the average number of queries and average corpus size, were calculated for each benchmark. ChemRxiv Retrieval, a specialized chemistry benchmark closely aligned with our training domain, comprises 5000 queries and a corpus of 69,000 documents. In contrast, ChemTEB Retrieval, despite being chemically-themed, consists of tasks derived from encyclopedic corpora such as HotpotQA \cite{yang2018hotpotqa} and Natural Questions \cite{kwiatkowski2019natural}, specifically \textbf{ChemHotpotQARetrieval} (only 206 queries, searching within 10,069 documents) and ChemNQRetrieval (merely 27 queries, within 22,933 documents), averaging only 117 queries and a 16,501-document corpus per retrieval task \textcolor{red}{Not enough reason for seeing a decline in performance -- if we could prove that the difference is not significant with Nomic V1, we were on the safe side.}. Similarly, MTEB Retrieval covers broader general-domain queries, averaging approximately 1482 queries and a corpus size of $109,645$ documents per task. These substantial differences in query and corpus scale underscore ChemTEB's limited representativeness as a benchmark for evaluating specialized chemical literature retrieval. This limitation is empirically reinforced by the checkpoint analysis shown in Figure~\ref{fig:training-curves}. In this figure, we assess the performance of \texttt{ChEmbed\textsubscript{vanilla}} model snapshots saved after each epoch of fine-tuning. As shown, performance on ChemRxiv Retrieval shows an overall upward trend across epochs, with several peaks and fluctuations, while performance on ChemTEB Retrieval steadily declines. This opposite trend highlights that ChemTEB’s retrieval queries and passages differ substantially in distribution from the specialized chemistry literature used for training, resulting in divergent performance trajectories. As the model specializes in chemical literature, it naturally misaligns with the general-domain distribution of ChemTEB.
+% \paragraph*{} Integrating both aspects discussed above, our analysis reveals apparent limitations of existing benchmarks for accurately assessing embedding models fine-tuned for retrieval tasks in specialized scientific domains. Non-retrieval results highlight the importance of closely matching the evaluation task with the training objective, as fine-tuning for retrieval inherently sacrifices performance gains on unrelated tasks. Likewise, retrieval results and training dynamics highlight the critical importance of ensuring domain alignment between training data and evaluation benchmarks. Given these observations, we argue that an effective and meaningful evaluation of chemistry retrieval embedding models must be explicitly aligned across two dimensions: the retrieval task itself and the specialized domain of literature. Such alignment motivates the introduction of a new retrieval benchmark.
+
+
+\end{document}
