@@ -489,10 +489,16 @@ Overall, these findings are consistent with distribution-specific adaptation. Ch
 
 We therefore position ChEmbed as a model specialized for chemistry literature retrieval, rather than as a universally superior embedding model for every form of chemistry-related text. More broadly, these results indicate that embedding models should be selected according to the text distribution and retrieval task of the intended corpus, not solely according to a broad domain label such as ``chemistry.''
 
-\subsection{ChEBI-guided role-based retrieval}
+% \subsection{ChEBI-guided role-based retrieval}
+\subsection{Impact of model fine-tuning on role-based retrieval}
 \label{subsec:chebi-role-retrieval}
-We sought a chemistry-interpretable view of the behaviour learned during ChEmbed training. Specifically, we asked whether a natural-language query about a chemical role would retrieve PubChem descriptions of compounds that ChEBI directly assigns to that role more effectively. PubChem supplied the descriptions, while ChEBI supplied structured role annotations independently of the embedding models \cite{kim2019pubchem,malik2025chebi}.
+To demonstrate an example of how this fine-tuning would impact the chemical topics retrieval, we evaluated its impact on chemical role retrieval. 
+To achieve this goal, combination of PubChem dataset \cite{kim2019pubchem} for compounds description and ChEBI \citep{malik2025chebi} knowledge graph for structured role annotation, were employed. 
 
+% We sought a chemistry-interpretable view of the behaviour learned during ChEmbed training. Specifically, we asked 
+The hypothesis was whether a natural-language query about a chemical role would retrieve PubChem descriptions of compounds that ChEBI directly assigns to that role more effectively. PubChem supplied the descriptions, while ChEBI supplied structured role annotations independently of the embedding models \cite{kim2019pubchem,malik2025chebi}.
+
+\subsubsection{Task Construction}
 Retaining one 20--500 word description per PubChem CID and removing exact duplicate texts yielded 44,887 retrieval candidates. We linked these PubChem records to ChEBI using explicit database links or exact full-InChI matches. If several usable PubChem CIDs matched the same ChEBI entity, we retained one CID to avoid duplication. This produced 42,068 ChEBI-to-PubChem mappings involving 40,656 PubChem CIDs. A role-based group contains the distinct mapped CIDs sharing the same direct ChEBI \texttt{has\_role} annotation and does not imply structural relatedness.
 
 Of 1,313 roles with at least one available mapped entity, 597 had 1--3 members, 518 had 4--30, and 198 had more than 30. The primary cohort used the 518 groups with 4--30 available entities, containing 5,783 compound-to-role assignments and 4,494 unique entities. We required at least four compounds so that each role could be evaluated as a group. Roles with more than 30 compounds were evaluated separately because they were much broader.
@@ -504,7 +510,11 @@ For each role, we used three fixed question forms:
     \item ``Find chemical entities with the role of [role].''
     \item ``What chemicals can function as [role]?''
 \end{itemize}
-The resulting 1,554 queries each ranked all 44,887 descriptions using Nomic, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. The directly annotated CIDs formed the reference set for that role. Average precision summarizes how early and consistently these reference descriptions appear across the complete ranking, while recall at 10 is the proportion appearing among the first ten results.
+
+\subsubsection{Results}
+With above approach we got a total of 1,554 queries. All 44,887 descriptions, got embedeed with baseline Nomic model, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. Then these embedded descriptions got sorted for each query.
+% The resulting 1,554 queries each ranked all 44,887 descriptions using Nomic, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. 
+The directly annotated CIDs formed the reference set for that role. Average precision summarizes how early and consistently these reference descriptions appear across the complete ranking, while recall at 10 is the proportion appearing among the first ten results. Table~\ref{tab:chebi-role-retrieval} summarizes the results. 
 
 \begin{table}[!t]
 \centering
@@ -522,20 +532,20 @@ ChEmbed\textsubscript{progressive} & \textbf{0.315} & \textbf{33.4\%} \\
 \end{tabular}
 \end{table}
 
-ChEmbed\textsubscript{progressive} improved 435 of the 518 primary role-based groups relative to Nomic. The improvement held across all three query templates. A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups above 30 preserved the same overall direction. Figure~\ref{fig:role-retrieval-cohort} summarizes the group-level comparison and the role-phrase masking control.
+ChEmbed\textsubscript{progressive} improved 435 of the 518 primary role-based groups relative to Nomic. The improvement held across all three query templates.\textcolor{red}{please add statistics} A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups above 30 preserved the same overall direction. Figure~\ref{fig:role-retrieval-cohort} summarizes the group-level comparison and the role-phrase masking control.
 
 \begin{figure*}[!t]
     \centering
-    \includegraphics[width=\textwidth]{figures/chebi-role-retrieval.pdf}
+    \includegraphics[width=0.8\textwidth]{figures/chebi-role-retrieval.pdf}
     \caption{Chemical-role retrieval across the 518-group primary cohort. (a) Group-level average precision (AP) for ChEmbed\textsubscript{progressive} versus Nomic; points above the diagonal improved after training. (b) Mean group-level AP for Nomic, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. (c) The same comparison before and after masking the exact ChEBI role phrase in the reference descriptions.}
     \label{fig:role-retrieval-cohort}
 \end{figure*}
 
 The factor Xa inhibitor role was retained as a continuity example before the full-corpus analysis. For the exact scored query, ``What chemicals can function as EC 3.4.21.6 (coagulation factor Xa) inhibitor?'', 3 of 8 directly annotated PubChem entities appeared among Nomic's first 10 results, compared with 7 of 8 for ChEmbed\textsubscript{progressive} (Figure~\ref{fig:factor-xa-retrieval}). This example illustrates the rank changes for individual compounds; the overall conclusion is based on all 518 role-based groups. The eight PubChem records correspond to six inhibitor identities because three records describe edoxaban, edoxaban tosylate, and edoxaban tosylate monohydrate.
 
-\begin{figure*}[!t]
+\begin{figure*}[!b]
     \centering
-    \includegraphics[width=\textwidth]{figures/factor-xa-retrieval.pdf}
+    \includegraphics[width=0.8\textwidth]{figures/factor-xa-retrieval.pdf}
     \caption{Retrieval ranks for the eight PubChem records directly annotated by ChEBI as coagulation factor Xa inhibitors. For the displayed query, three records appeared among Nomic's first ten results and seven among ChEmbed\textsubscript{progressive}'s first ten. The eight records correspond to six inhibitor identities because edoxaban, edoxaban tosylate, and edoxaban tosylate monohydrate are separate records. Structures identify the records; retrieval used description text only.}
     \label{fig:factor-xa-retrieval}
 \end{figure*}
