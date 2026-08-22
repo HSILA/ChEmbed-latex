@@ -492,10 +492,9 @@ We therefore position ChEmbed as a model specialized for chemistry literature re
 % \subsection{ChEBI-guided role-based retrieval}
 \subsection{Impact of model fine-tuning on role-based retrieval}
 \label{subsec:chebi-role-retrieval}
-To demonstrate an example of how this fine-tuning would impact the chemical topics retrieval, we evaluated its impact on chemical role retrieval. 
-To achieve this goal, combination of PubChem dataset \cite{kim2019pubchem} for compounds description and ChEBI \citep{malik2025chebi} knowledge graph for structured role annotation, were employed. 
+To demonstrate an example of how this fine-tuning would impact the chemical topics retrieval, we evaluated its impact on chemical role retrieval.
+To achieve this goal, combination of PubChem dataset \cite{kim2019pubchem} for compounds description and ChEBI \citep{malik2025chebi} knowledge graph for structured role annotation, were employed.
 
-% We sought a chemistry-interpretable view of the behaviour learned during ChEmbed training. Specifically, we asked 
 The hypothesis was whether a natural-language query about a chemical role would retrieve PubChem descriptions of compounds that ChEBI directly assigns to that role more effectively. PubChem supplied the descriptions, while ChEBI supplied structured role annotations independently of the embedding models \cite{kim2019pubchem,malik2025chebi}.
 
 \subsubsection{Task Construction}
@@ -513,8 +512,7 @@ For each role, we used three fixed question forms:
 
 \subsubsection{Results}
 With above approach we got a total of 1,554 queries. All 44,887 descriptions, got embedeed with baseline Nomic model, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. Then these embedded descriptions got sorted for each query.
-% The resulting 1,554 queries each ranked all 44,887 descriptions using Nomic, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. 
-The directly annotated CIDs formed the reference set for that role. Average precision summarizes how early and consistently these reference descriptions appear across the complete ranking, while recall at 10 is the proportion appearing among the first ten results. Table~\ref{tab:chebi-role-retrieval} summarizes the results. 
+The directly annotated CIDs formed the reference set for that role. Average precision summarizes how early and consistently these reference descriptions appear across the complete ranking, while recall at 10 is the proportion appearing among the first ten results. Table~\ref{tab:chebi-role-retrieval} summarizes the results.
 
 \begin{table}[!t]
 \centering
@@ -532,12 +530,12 @@ ChEmbed\textsubscript{progressive} & \textbf{0.315} & \textbf{33.4\%} \\
 \end{tabular}
 \end{table}
 
-ChEmbed\textsubscript{progressive} improved 435 of the 518 primary role-based groups relative to Nomic. The improvement held across all three query templates.\textcolor{red}{please add statistics} A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups above 30 preserved the same overall direction. Figure~\ref{fig:role-retrieval-cohort} summarizes the group-level comparison and the role-phrase masking control.
+ChEmbed\textsubscript{progressive} improved 435 of the 518 primary role-based groups relative to Nomic, a mean gain of $+0.139$ AP per group (paired $t$-test across the 518 groups, 95\% CI $[0.124, 0.154]$, $p<10^{-50}$). ChEmbed\textsubscript{vanilla} improved fewer groups, 298 of 518, and by a much smaller margin. The improvement held across all three query templates, with gains of $+0.168$, $+0.113$ and $+0.137$ AP. A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups above 30 preserved the same overall direction. Figure~\ref{fig:role-retrieval-cohort} summarizes the group-level comparison and the role-phrase masking control.
 
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/chebi-role-retrieval.pdf}
-    \caption{Chemical-role retrieval across the 518-group primary cohort. (a) Group-level average precision (AP) for ChEmbed\textsubscript{progressive} versus Nomic; points above the diagonal improved after training. (b) Mean group-level AP for Nomic, ChEmbed\textsubscript{vanilla}, and ChEmbed\textsubscript{progressive}. (c) The same comparison before and after masking the exact ChEBI role phrase in the reference descriptions.}
+    \caption{Chemical-role retrieval across the 518-group primary cohort. (a) Group-level average precision (AP) for ChEmbed\textsubscript{progressive} versus Nomic; points above the diagonal improved after training. (b) Mean AP over the 518 groups, before and after masking the exact ChEBI role phrase in the descriptions. Error bars are 95\% bootstrap confidence intervals. Stars are paired $t$-tests against Nomic within each condition ($^{*}p<0.05$, $^{***}p<0.001$).}
     \label{fig:role-retrieval-cohort}
 \end{figure*}
 
