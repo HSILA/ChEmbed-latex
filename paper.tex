@@ -135,11 +135,11 @@
 \sffamily
 \begin{tabular}{m{4.5cm} p{13.5cm} }
 
-\includegraphics{head_foot/DOI} & \noindent\LARGE{\textbf{ChEmbed: Enhancing Chemical Literature Search Through Domain-Specific Text Embeddings}}\\
+\includegraphics{head_foot/DOI} & \noindent\LARGE{\textbf{ChEmbed: Enhancing Chemical Literature Search Through Domain-Specific Text Embeddings\dag}}\\
 \vspace{0.3cm} & \vspace{0.3cm} \\
 
 % $^{\ast}$
- & \noindent\large{Ali Shiraee Kasmaee,\textit{$^{ab\ddag}$} Mohammad Khodadad,\textit{$^{ab\ddag}$} Mahdi Astaraki,\textit{$^{ab}$} Mohammad Arshi Saloot,\textit{$^{b}$} Nicholas Sherck,\textit{$^{c}$} Hamidreza Mahyar\textit{$^{a}$} and Soheila
+ & \noindent\large{Ali Shiraee Kasmaee,\textit{$^{ab}$} Mohammad Khodadad,\textit{$^{ab}$} Mahdi Astaraki,\textit{$^{ab}$} Mohammad Arshi Saloot,\textit{$^{b}$} Nicholas Sherck,\textit{$^{c}$} Hamidreza Mahyar\textit{$^{a}$} and Soheila
 Samiee\textit{$^{b}$}} \\
 
 \includegraphics{head_foot/dates} & \noindent\normalsize{Retrieval-Augmented Generation (RAG) systems in chemistry heavily depend on accurate and relevant retrieval of chemical literature. However, general-purpose text embedding models frequently fail to adequately represent complex chemical terminologies, resulting in suboptimal retrieval quality. Existing embedding models for chemistry are outdated, and none is tailored to chemical literature retrieval, leaving a substantial performance gap. To address this challenge, we introduce \textbf{ChEmbed}, the first purpose-built family of domain-adapted text embedding models engineered for chemical literature retrieval. These models are fine-tuned via contrastive learning on a dataset comprising chemistry-specific text from the PubChem, Semantic Scholar, and ChemRxiv corpora. To create effective training data, we employ large language models to synthetically generate queries, resulting in approximately 1.7 million high-quality query-passage pairs. Additionally, we augment the tokenizer by adding 900 chemically specialized tokens to previously unused slots, which reduces the fragmentation of chemical entities, such as IUPAC names.
@@ -168,9 +168,7 @@ Evaluated on our newly introduced \textbf{ChemRxiv Retrieval} benchmark, ChEmbed
 %Please use \dag to cite the ESI in the main text of the article.
 %If you article does not have ESI please remove the the \dag symbol from the title and the footnotetext below.
 
-% \footnotetext{\dag~Supplementary Information available: [details of any supplementary information available should be included here]. See DOI: 00.0000/00000000.}
-
-\footnotetext{\ddag~These authors contributed equally to this work}
+\footnotetext{\dag~Supplementary information (SI): base-model separation of chemistry literature from encyclopedic text, and the change in embedding geometry after fine-tuning. See DOI: 00.0000/00000000.}
 
 
 %%%END OF FOOTNOTES%%%
@@ -373,9 +371,9 @@ Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\
     \texttt{stella\_en\_1.5B\_v5} & 8960 & 1540.0 & 0.760 & 0.802 \\
     \texttt{jina-embeddings-v3} & 1024 & 572.0 & 0.715 & 0.759 \\
     \texttt{embeddinggemma-300m} & 768 & 307.6 & 0.799 & 0.836 \\
-    \texttt{Qwen3-Embedding-0.6B}$^{\dagger}$ & 1024 & 595.8 & 0.803 & 0.840 \\
-    \texttt{Qwen3-Embedding-4B}$^{\dagger}$ & 2560 & 4021.8 & 0.838 & 0.871 \\
-    \texttt{Qwen3-Embedding-8B}$^{\dagger}$ & 4096 & 7567.3 & 0.846 & 0.878 \\
+    \texttt{Qwen3-Embedding-0.6B}$^{a}$ & 1024 & 595.8 & 0.803 & 0.840 \\
+    \texttt{Qwen3-Embedding-4B}$^{a}$ & 2560 & 4021.8 & 0.838 & 0.871 \\
+    \texttt{Qwen3-Embedding-8B}$^{a}$ & 4096 & 7567.3 & 0.846 & 0.878 \\
     \texttt{ChEmbed\textsubscript{vanilla}} & 768 & 136.7 & 0.879 & 0.903 \\
     \texttt{ChEmbed\textsubscript{progressive}} & 768 & 136.7 & \textbf{0.882} & \textbf{0.906} \\
     \midrule
@@ -388,7 +386,7 @@ Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\
     \texttt{cohere-embed-english-v3} & 1024 & N/A & 0.737 & 0.781 \\
     \texttt{cohere-embed-multilingual-v3} & 1024 & N/A & 0.747 & 0.789 \\
     \bottomrule
-\multicolumn{5}{l}{\footnotesize $^{\dagger}$\,Loaded the model with bfloat16 to fit into GPU VRAM.}\\\end{tabular}
+\multicolumn{5}{l}{\footnotesize $^{a}$\,Loaded the model with bfloat16 to fit into GPU VRAM.}\\\end{tabular}
 \end{table*}
 
 \paragraph*{Quantitative performance comparison}
@@ -466,18 +464,18 @@ The retrieval comparison in Table~\ref{tab:retrieval-wide} warrants closer atten
 \resizebox{\textwidth}{!}{
 \begin{tabular}{ll ccc | ccc}
 \toprule
- & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} & \multicolumn{3}{c}{\textbf{Retrieval Score$^{\ddagger}$ $\uparrow$}} \\
+ & & \multicolumn{3}{c|}{\textbf{Dataset statistics}} & \multicolumn{3}{c}{\textbf{Retrieval Score$^{b}$ $\uparrow$}} \\
 \cmidrule(lr){3-5}\cmidrule(lr){6-8}
 Task & Dataset
 & \#Tasks & Avg Queries & Avg Corpus & nomic-embed-text-v1 & \texttt{ChEmbed\textsubscript{vanilla}} & \texttt{ChEmbed\textsubscript{progressive}} \\
 \midrule
-Chemistry Retrieval & ChemTEB(latest)$^{\dagger}$
+Chemistry Retrieval & ChemTEB(latest)$^{a}$
 & 3 & 1682 & $34,153$ & 0.746 & 0.741 & 0.728 \\
 Open-domain Retrieval & MTEB Retrieval
 & 10 & 1482 & $109,645$ & 0.544 & 0.467 & 0.475 \\
 \bottomrule
-\multicolumn{8}{l}{\footnotesize $^{\ddagger}$\,MRR@10 for Chemistry Retrieval; NDCG@10 for Open-domain Retrieval (multiple relevant documents per query). ChemRxiv Retrieval and ChemHotpotQA have one relevant document per query; ChemNQ averages 1.3.}\\
-\multicolumn{8}{l}{\footnotesize $^{\dagger}$ ChemTEB(latest) comprises ChemRxiv Retrieval and two encyclopedic tasks; individual ChemRxiv Retrieval scores appear in Table~\ref{tab:chemrxiv-results}.}\\
+\multicolumn{8}{l}{\footnotesize $^{a}$\,ChemTEB(latest) comprises ChemRxiv Retrieval and two encyclopedic tasks; individual ChemRxiv Retrieval scores appear in Table~\ref{tab:chemrxiv-results}.}\\
+\multicolumn{8}{l}{\footnotesize $^{b}$\,MRR@10 for Chemistry Retrieval; NDCG@10 for Open-domain Retrieval (multiple relevant documents per query). ChemRxiv Retrieval and ChemHotpotQA have one relevant document per query; ChemNQ averages 1.3.}\\
 \end{tabular}}
 \end{table*}
 
