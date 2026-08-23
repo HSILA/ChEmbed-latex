@@ -75,13 +75,14 @@ primary comparison contained 800 ChemRxiv paragraphs and an equally sized
 encyclopedic sample composed of 400 ChemNQ and 400 ChemHotpotQA passages;
 sampling used seed 1337.
 
-All three models received the same 1{,}600 passages after identical text
+All three models, the \texttt{nomic-embed-text-v1} base encoder and the two
+adapted variants, received the same 1{,}600 passages after identical text
 preprocessing. Each input began with the model's document-search prefix
-(\texttt{search\_document:\ }). The
-encyclopedic benchmark records store the source-page title separately from the
-passage body, so this existing title field was placed before the passage text,
-as in the retrieval evaluation. ChemRxiv records have no separate title field
-and were therefore encoded using the paragraph text alone. The resulting
+\texttt{search\_document:}. The encyclopedic benchmark records store the
+source-page title separately from the passage body, so this existing title
+field was placed before the passage text, as in the retrieval evaluation.
+ChemRxiv records have no separate title field and were therefore encoded using
+the paragraph text alone. The resulting
 768-dimensional embeddings were L2-normalized, and inference was performed on
 CPU in single precision. We use \CEv{} as the primary adapted model because it
 isolates the effect of fine-tuning from the tokenizer augmentation discussed in
