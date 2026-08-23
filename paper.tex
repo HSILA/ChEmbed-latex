@@ -371,6 +371,7 @@ Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\
     \texttt{modernbert-embed-base} & 768 & 149.0 & 0.765 & 0.807 \\
     \texttt{stella\_en\_1.5B\_v5} & 8960 & 1540.0 & 0.760 & 0.802 \\
     \texttt{jina-embeddings-v3} & 1024 & 572.0 & 0.715 & 0.759 \\
+    \texttt{embeddinggemma-300m} & 768 & 307.6 & 0.799 & 0.836 \\
     \texttt{Qwen3-Embedding-0.6B}$^{\dagger}$ & 1024 & 595.8 & 0.803 & 0.840 \\
     \texttt{Qwen3-Embedding-4B}$^{\dagger}$ & 2560 & 4021.8 & 0.838 & 0.871 \\
     \texttt{Qwen3-Embedding-8B}$^{\dagger}$ & 4096 & 7567.3 & 0.846 & 0.878 \\
@@ -407,16 +408,10 @@ Fig.~\ref{fig:bubble} visualizes the efficiency-performance balance of various e
 \label{subsec:tokenizer}
 
 For the chemical retrieval task, we compared four tokenizer configurations while keeping the rest of the fine-tuning recipe unchanged: \\
-% \begin{enumerate}
-    % \item
      1.\textbf{ ChEmbed\textsubscript{vanilla}}: The vanilla variant with \texttt{bert-base-uncased} tokenizer and no vocabulary augmentation.  \\
-    % \item
      2.\textbf{ ChEmbed\textsubscript{full}}: ChemVocab tokenizer, \emph{all} embedding parameters are trainable.  \\
-    % \item
      3.\textbf{ ChEmbed\textsubscript{plug}}: ChemVocab tokenizer, but only the new token embeddings are updated while original BERT token embeddings stay frozen; the rest of the network is trainable. \\
-    % \item
     4.\textbf{  ChEmbed\textsubscript{progressive}}: progressive schedule, first train some epochs only the new token embeddings (all other weights frozen), then unfreeze and train the whole network for additional epochs.
-% \end{enumerate}
 
 To assess the impact of tokenizer modifications on retrieval effectiveness, Table~\ref{tab:tok-ablation} compares the four ChEmbed configurations with the base model. All fine-tuned variants improve substantially on the target benchmark, but the differences among tokenizer configurations are small and non-monotonic. The progressive adaptation strategy achieves the highest score, although its improvement over vanilla is modest. These results suggest that the training schedule can help integrate the adapted vocabulary, but they do not establish that vocabulary augmentation consistently improves retrieval or preserves general-domain performance.
 
@@ -552,7 +547,7 @@ ChEmbed\textsubscript{progressive} & \textbf{0.315} & \textbf{33.4\%} \\
 \end{table}
 
 \paragraph*{Findings }
-Table~\ref{tab:chebi-role-retrieval} summarizes the results. ChEmbed\textsubscript{progressive} improved performance for 435 of the 518 primary role-based groups relative to Nomic, with a mean gain of $+0.139$ average precision (AP) per group (paired $t$-test across the 518 groups, 95\% CI $[0.124, 0.154]$, $p<10^{-5}$). ChEmbed\textsubscript{vanilla} improved fewer groups, 298 out of 518, and by a much smaller margin. The improvement held across all three query templates, with gains of $+0.168$, $+0.113$ and $+0.137$ AP. A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups with more than 30 members preserved the same overall trend. Fig.~\ref{fig:role-retrieval-cohort}-A shows the average precision for each primary role-based group in ChEmbed\textsubscript{progressive} versus the base Nomic model, providing greater transparency than the aggregated AP values reported in Table~\ref{tab:chebi-role-retrieval}.  Fig.~\ref{fig:role-retrieval-cohort}-B compares the mean AP of the three models under two conditions: the original PubChem descriptions, and a role-phrase masking control in which the exact queried ChEBI role label was removed from the reference descriptions before ranking. The masking result is discussed below.
+Table~\ref{tab:chebi-role-retrieval} summarizes the results. ChEmbed\textsubscript{progressive} improved performance for 435 of the 518 primary role-based groups relative to Nomic, with a mean gain of $+0.139$ average precision (AP) per group (paired $t$-test across the 518 groups, 95\% CI $[0.124, 0.154]$, $p<0.001$). ChEmbed\textsubscript{vanilla} improved fewer groups, 298 out of 518, and by a much smaller margin. The improvement held across all three query templates, with gains of $+0.168$, $+0.113$ and $+0.137$ AP. A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups with more than 30 members preserved the same overall trend. Fig.~\ref{fig:role-retrieval-cohort}-A shows the average precision for each primary role-based group in ChEmbed\textsubscript{progressive} versus the base Nomic model, providing greater transparency than the aggregated AP values reported in Table~\ref{tab:chebi-role-retrieval}.  Fig.~\ref{fig:role-retrieval-cohort}-B compares the mean AP of the three models under two conditions: the original PubChem descriptions, and a role-phrase masking control in which the exact queried ChEBI role label was removed from the reference descriptions before ranking. The masking result is discussed below.
 
 \begin{figure*}[!t]
     \centering
