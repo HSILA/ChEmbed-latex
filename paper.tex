@@ -253,7 +253,7 @@ To assess whether the generated queries represented meaningful chemistry informa
     \label{fig:expert-review}
 \end{figure*}
 
-In the evaluation, only the passages used to generate the query was considered the correct retrieval and MRR was calculated based on the rank of this passage. To evaluate whether other correct documents might exist for the queries, a second task was defined.
+In the evaluation, only the passage used to generate each query was considered relevant, and MRR was calculated from the rank of that passage. To evaluate whether other correct documents might exist for the queries, a second task was defined.
 In this task, we selected 50 cases from the ChemRxiv evaluation set, evenly split between 25 cases in which the designated gold passage appeared in the top 10 results and 25 cases in which it did not. The reviewer saw the query, its designated gold passage, and the top 10 passages retrieved by \texttt{ChEmbed\textsubscript{progressive}}. In addition to evaluating the queries and answers using the Task A criteria, the human expert was asked to classify each non-gold passage as either \textit{not relevant}, \textit{somewhat relevant}, or \textit{relevant}. If a strongly relevant non-gold passage was identified, the reviewer could mark it as a near miss.
 
 For Task A, 48 of 50 queries (96\%) were judged answerable. The mean ratings were 4.76 for specificity, 4.56 for query quality, 4.92 for standalone clarity, and 4.72 for scientific validity. For Task B, 45 of 50 queries (90\%) were judged answerable, with corresponding mean ratings of 4.98, 4.84, 5.00, and 5.00. At least one near miss (a strongly relevant non-gold passage) was identified in 32 of the 50 retrieval cases. No item was removed from the evaluation set as a result of this review, and its findings did not feed back into any evaluation.
@@ -334,7 +334,7 @@ Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\
     \multicolumn{5}{l}{\textbf{Open-Source Models}}\\
     \texttt{chemical-bert-uncased} & 768 & 110.0 & 0.096 & 0.110 \\
     \texttt{matscibert} & 768 & 110.0 & 0.117 & 0.137 \\
-    \texttt{nomic-bert-2048} & None & 137.3 & 0.019 & 0.025 \\
+    \texttt{nomic-bert-2048} & 768 & 137.3 & 0.019 & 0.025 \\
     \texttt{ModernBERT-base} & 768 & 149.7 & 0.047 & 0.056 \\
     \texttt{ModernBERT-large} & 1024 & 395.9 & 0.048 & 0.058 \\
     \texttt{scibert\_scivocab\_uncased} & 768 & N/A & 0.100 & 0.119 \\
@@ -356,10 +356,10 @@ Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\
     \texttt{gte-base} & 768 & 109.5 & 0.700 & 0.748 \\
     \texttt{gte-large} & 1024 & 335.1 & 0.722 & 0.768 \\
     \texttt{gte-multilingual-base} & 768 & 305.0 & 0.712 & 0.761 \\
-    \texttt{bge-small-en} & 512 & 33.4 & 0.705 & 0.751 \\
+    \texttt{bge-small-en} & 384 & 33.4 & 0.705 & 0.751 \\
     \texttt{bge-base-en} & 768 & 109.0 & 0.721 & 0.766 \\
     \texttt{bge-large-en} & 1024 & 335.0 & 0.741 & 0.785 \\
-    \texttt{bge-small-en-v1.5} & 512 & 33.4 & 0.704 & 0.750 \\
+    \texttt{bge-small-en-v1.5} & 384 & 33.4 & 0.704 & 0.750 \\
     \texttt{bge-base-en-v1.5} & 768 & 109.0 & 0.729 & 0.773 \\
     \texttt{bge-large-en-v1.5} & 1024 & 335.0 & 0.744 & 0.787 \\
     \texttt{bge-m3} & 1024 & 568.0 & 0.758 & 0.798 \\
@@ -368,7 +368,7 @@ Model Name & Emb. size & \#Params (M) & MRR@10 & NDCG@10 \\
     \texttt{nomic-embed-text-v1.5} & 768 & 137.0 & 0.739 & 0.783 \\
     \texttt{nomic-embed-text-v2-moe} & 768 & 475.3 & 0.780 & 0.819 \\
     \texttt{modernbert-embed-base} & 768 & 149.0 & 0.765 & 0.807 \\
-    \texttt{stella\_en\_1.5B\_v5} & 8960 & 1540.0 & 0.760 & 0.802 \\
+    \texttt{stella\_en\_1.5B\_v5} & 1536 & 1540.0 & 0.760 & 0.802 \\
     \texttt{jina-embeddings-v3} & 1024 & 572.0 & 0.715 & 0.759 \\
     \texttt{embeddinggemma-300m} & 768 & 307.6 & 0.799 & 0.836 \\
     \texttt{Qwen3-Embedding-0.6B}$^{a}$ & 1024 & 595.8 & 0.803 & 0.840 \\
@@ -396,12 +396,12 @@ The vanilla model \textbf{ChEmbed\textsubscript{vanilla}}, which uses the origin
 \begin{figure*}[!t]
         \centering
         \includegraphics[width=0.8\linewidth]{figures/mrr.pdf}
-        \caption{Model efficiency on the ChemRxiv retrieval task. The x-axis represents retrieval speed, the y-axis shows ranking effectiveness measured by Mean Reciprocal Rank ($MRR@10$), and circle diameters are proportional to the number of model parameters.}
+        \caption{Model efficiency on the ChemRxiv retrieval task. The x-axis represents retrieval speed, the y-axis shows ranking effectiveness measured by Mean Reciprocal Rank ($MRR@10$), and circle sizes represent the number of model parameters.}
         \label{fig:bubble}
 \end{figure*}
 
 \paragraph*{Speed-performance trade-off analysis}
-Fig.~\ref{fig:bubble} visualizes the efficiency-performance balance of various embedding models on the ChemRxiv retrieval. The models are plotted according to retrieval speed (samples per second) on the horizontal axis and \textit{MRR@10} on the vertical axis. The marker size indicates the model's parameter count, while color reflects the maximum embedding dimension provided by the model. On an NVIDIA A10 24GB GPU, our ChEmbed variants process an average of 189 samples per second, whereas the strongest competing open-source models, \texttt{Qwen3-Embedding-4B} and \texttt{Qwen3-Embedding-8B}, process only 13 and 10 samples per second, respectively. Notably, both Qwen3 models are more than 30 and 55 times larger than ChEmbed, yet still fall short in retrieval accuracy, with their best variant (\texttt{Qwen3-Embedding-8B}) achieving only 0.846 \textit{MRR@10} compared to ChEmbed's 0.882. This demonstrates that ChEmbed achieves state-of-the-art chemical literature retrieval performance while being significantly faster and more lightweight than its closest open-source alternatives.
+Fig.~\ref{fig:bubble} visualizes the efficiency-performance balance of various embedding models on the ChemRxiv retrieval. The models are plotted according to retrieval speed (examples per second) on the horizontal axis and \textit{MRR@10} on the vertical axis. The marker size indicates the model's parameter count, while color reflects the maximum embedding dimension provided by the model. On an NVIDIA A10 24GB GPU, \textbf{ChEmbed\textsubscript{vanilla}} and \textbf{ChEmbed\textsubscript{progressive}} processed approximately 158 and 171 examples per second, respectively (a mean of 165), whereas \texttt{Qwen3-Embedding-4B} and \texttt{Qwen3-Embedding-8B} processed approximately 56 and 38 examples per second, respectively. The two Qwen3 models contain approximately 29 and 55 times as many parameters as ChEmbed, respectively, yet still fall short in retrieval accuracy, with their best variant (\texttt{Qwen3-Embedding-8B}) achieving only 0.846 \textit{MRR@10} compared to ChEmbed's 0.882. This demonstrates that ChEmbed achieves state-of-the-art chemical literature retrieval performance while being significantly faster and more lightweight than its closest open-source alternatives.
 
 \subsection{Tokenizer adaptation analysis}
 \label{subsec:tokenizer}
@@ -450,7 +450,7 @@ nomic-embed-text-v1 & \textbf{0.838} & \textbf{0.607} & 0.591 & \textbf{0.768} &
 
 \subsection{Impact of Task and Domain Adaptation}
 \label{subsec:adaptation-impact}
-The goal of this work is chemical literature search, and the training data reflect that focus: fine-tuning used 1.7 million retrieval-style query--passage pairs over chemistry text, more than 98\% of which pair an LLM-generated query with a real chemistry passage. Specialization through fine-tuning can improve performance on the target task while reducing transfer to other tasks or data distributions \citep{mosbach2023analyzing}. To examine both aspects, we evaluated all model variants on two public suites beyond our target benchmark: ChemTEB \cite{pmlr-v262-shiraee-kasmaee24a}, which covers chemistry-related embedding tasks, and MTEB English v2 \citep{muennighoff2022mteb}, a general-purpose benchmark spanning multiple tasks and domains.
+The goal of this work is chemical literature search, and the training data reflect that focus: fine-tuning used 1.7 million retrieval-style query--passage pairs over chemistry text, more than 98\% of which pair an LLM-generated query with a real chemistry passage. Because specialization through fine-tuning can alter performance across tasks and data distributions \citep{mosbach2023analyzing}, we evaluated all model variants on two public suites beyond our target benchmark: ChemTEB \cite{pmlr-v262-shiraee-kasmaee24a}, which covers chemistry-related embedding tasks, and MTEB English v2 \citep{muennighoff2022mteb}, a general-purpose benchmark spanning multiple tasks and domains.
 
 The non-retrieval results are consistent with this specialization. As Table~\ref{tab:nonretrieval-wide} shows, the base model generally retains an advantage on classification, clustering, and pair-classification tasks in both the chemistry-specific and general-purpose suites. The ChEmbed variants therefore trade some performance on objectives absent from their training data for improved performance on the target literature-retrieval task. These results delimit the intended use of the models: ChEmbed was optimized for retrieval rather than as a universal replacement for the base model across embedding tasks.
 
@@ -524,7 +524,7 @@ ChEmbed\textsubscript{progressive} & \textbf{0.315} & \textbf{33.4\%} \\
 \end{table}
 
 \paragraph*{Findings }
-Table~\ref{tab:chebi-role-retrieval} summarizes the results. ChEmbed\textsubscript{progressive} improved performance for 435 of the 518 primary role-based groups relative to Nomic, with a mean gain of $+0.139$ average precision (AP) per group (paired $t$-test across the 518 groups, 95\% CI $[0.124, 0.154]$, $p<0.001$). ChEmbed\textsubscript{vanilla} improved fewer groups, 298 out of 518, and by a much smaller margin. The improvement held across all three query templates, with gains of $+0.168$, $+0.113$ and $+0.137$ AP. A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups with more than 30 members preserved the same overall trend. Fig.~\ref{fig:role-retrieval-cohort}-A shows the average precision for each primary role-based group in ChEmbed\textsubscript{progressive} versus the base Nomic model, providing greater transparency than the aggregated AP values reported in Table~\ref{tab:chebi-role-retrieval}. Fig.~\ref{fig:role-retrieval-cohort}-B compares the mean AP of the three models under two conditions: the original PubChem descriptions, and a role-phrase masking control in which the exact queried ChEBI role label was removed from the reference descriptions before ranking. The masking result is discussed below.
+Table~\ref{tab:chebi-role-retrieval} summarizes the results. ChEmbed\textsubscript{progressive} improved performance for 435 of the 518 primary role-based groups relative to Nomic, with a mean gain of $+0.139$ average precision (AP) per group (paired $t$-test across the 518 groups, 95\% CI $[0.124, 0.154]$, $p<0.001$). ChEmbed\textsubscript{vanilla} improved fewer groups, 298 out of 518, and by a much smaller margin. The improvement held across all three query templates, with gains of $+0.168$, $+0.112$ and $+0.137$ AP. A separate sensitivity analysis restricted to one-to-one PubChem-to-ChEBI correspondences produced an essentially identical model advantage, while including groups with more than 30 members preserved the same overall trend. Fig.~\ref{fig:role-retrieval-cohort}-A shows the average precision for each primary role-based group in ChEmbed\textsubscript{progressive} versus the base Nomic model, providing greater transparency than the aggregated AP values reported in Table~\ref{tab:chebi-role-retrieval}. Fig.~\ref{fig:role-retrieval-cohort}-B compares the mean AP of the three models under two conditions: the original PubChem descriptions, and a role-phrase masking control in which the exact queried ChEBI role label was removed from the reference descriptions before ranking. The masking result is discussed below.
 
 \begin{figure*}[!t]
     \centering
