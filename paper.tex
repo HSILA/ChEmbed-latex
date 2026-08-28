@@ -567,17 +567,15 @@ Additionally, future efforts could consider building domain-specific embedding m
 BASF has submitted a patent application covering components of the methodology presented in this manuscript.
 
 \section*{Data availability}
-All resources required to reproduce the findings of this study are publicly available.
+The following resources are publicly available.
 \begin{itemize}
-    \item \textbf{Model Weights:} The fine-tuned model weights for all ChEmbed variants (supporting the "LLM fine-tuning" guidelines) are available on Hugging Face at \href{https://huggingface.co/collections/BASF-AI/chembed}{huggingface.co/collections/BASF-AI/chembed}.
-    \item \textbf{Training Data:} The complete training datasets, including the 1.7 million synthetic query-passage pairs generated via LLMs, are hosted at \href{https://huggingface.co/collections/BASF-AI/chembed-training-data}{huggingface.co/collections/BASF-AI/chembed-training-data}.
+    \item \textbf{Model Weights:} The fine-tuned model weights for all ChEmbed variants are available on Hugging Face at \href{https://huggingface.co/collections/BASF-AI/chembed}{huggingface.co/collections/BASF-AI/chembed} for non-commercial use.
+    \item \textbf{Training Data:} A subset of the training data is available at \href{https://huggingface.co/datasets/BASF-AI/ChEmbed-Training}{huggingface.co/datasets/BASF-AI/ChEmbed-Training}. A collection of the raw open-source data used to construct the training corpus is available at \href{https://huggingface.co/collections/BASF-AI/chembed-training-data}{huggingface.co/collections/BASF-AI/chembed-training-data}.
     \item \textbf{Evaluation Benchmark:} The ChemRxiv Retrieval benchmark introduced in this work is available at \href{https://huggingface.co/datasets/BASF-AI/ChemRxivRetrieval}{huggingface.co/datasets/BASF-AI/ChemRxivRetrieval}.
-    \item \textbf{Codebase:} The training and evaluation code, including the fine-tuning recipes, is hosted at \href{https://github.com/HSILA/ChEmbed}{github.com/HSILA/ChEmbed}.
-    \item \textbf{Data Extraction:} The data gathering pipeline and synthetic query generation scripts (including prompts) are hosted at \href{https://github.com/HSILA/Chemistry-Data}{github.com/HSILA/Chemistry-Data}.
-    \item \textbf{Evaluation Results:} The raw evaluation results and scripts used to generate the manuscript tables and plots can be found at \href{https://github.com/HSILA/ChEmbed-Results}{github.com/HSILA/ChEmbed-Results}.
+    \item \textbf{Supporting Materials:} The data collection and synthetic query-generation pipelines, evaluation code, raw evaluation results, analyses, expert-review materials, and scripts for the manuscript tables and generated figures are available at \href{https://github.com/HSILA/ChEmbed-Artifacts}{github.com/HSILA/ChEmbed-Artifacts}.
 \end{itemize}
 
-Permanent DOIs for the code and datasets (via Zenodo) will be made available upon acceptance of the manuscript. Any additional materials not publicly available due to licensing restrictions are available from the corresponding author on reasonable request.
+Permanent DOIs for the repository and datasets (via Zenodo) will be made available upon acceptance of the manuscript.
 
 \section*{Acknowledgements}
 The author(s) gratefully acknowledge the financial support received for the research, authorship, and/or publication of this article, made possible by \textbf{MITACS} funding number IT32409. This project also benefited from the computational resources provided by the Narval clusters of the \textbf{Digital Research Alliance of Canada}. We extend our sincere appreciation to \textbf{Adam Wojciech Bartwiki} for his project management contributions and to \textbf{Tobias Roth} for his support with computational resources and technical assistance. The authors acknowledge the use of large language models (Claude Opus 5, Claude 3.5 Sonnet, GPT-5, GPT-5.1, GPT-5.6 Sol, and Gemini 3.1) as coding assistants and for linguistic refinement during the preparation of this manuscript. The language models used to generate the training and evaluation queries are described in Section~\ref{subsec:query-generation}. All outputs were reviewed and verified by the authors, who take full responsibility for the content of this article.
